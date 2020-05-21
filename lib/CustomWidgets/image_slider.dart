@@ -15,18 +15,20 @@ class _ImageSliderState extends State<ImageSlider> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 19.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        height: widget.height,
-        child: Carousel(
-          borderRadius: true,
-          autoplayDuration: Duration(seconds: 2),
-          showIndicator: false,
-          boxFit: BoxFit.cover,
-          images: widget.ImageList,
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          height: widget.height,
+          child: Carousel(
+            borderRadius: true,
+            autoplayDuration: Duration(seconds: 2),
+            showIndicator: false,
+            boxFit: BoxFit.cover,
+            images: widget.ImageList,
+          ),
         ),
       ),
     );

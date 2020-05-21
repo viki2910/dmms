@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:dmms/CustomWidgets/image_slider.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
 import 'package:dmms/Screens/NewActivity.dart';
@@ -13,12 +12,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<AssetImage> imageList = [
-    AssetImage('assets/car1.jpg'),
-    AssetImage('assets/car2.jpg'),
-    // AssetImage('assets/change-password.png'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

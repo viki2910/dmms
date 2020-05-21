@@ -1,5 +1,6 @@
 import 'package:dmms/Models/dashboard_cards.dart';
 import 'package:dmms/Models/image_quiz.dart';
+import 'package:flutter/material.dart';
 
 
 
@@ -29,4 +30,10 @@ final List<ImageQuiz> imageQuiz = [
   ImageQuiz(title:'Quiz for all AIIMS Exam', description:'Based on Jodhpur AIIMS, Delhi AIIMS, Patna AIIMS all exams'),
   ImageQuiz(title:'Quiz for ESIC, PGI, DSSSB Exam', description:'Based on All Central Government Nursing Officer Exam. Join Membership Test Series for Full Paper'),
   ImageQuiz(title:'Quiz for Nursing Officer Exam', description:'Based on all State Government Nursing Officer Exam'),
+];
+
+List<AssetImage> imageList = [
+  AssetImage('assets/car1.jpg'),
+  AssetImage('assets/car2.jpg'),
+  // AssetImage('assets/change-password.png'),
 ];
