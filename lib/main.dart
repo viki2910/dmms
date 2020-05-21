@@ -1,3 +1,4 @@
+import 'package:dmms/Screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Screens/home.dart';
@@ -10,6 +11,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey[50],
         primaryColor: Colors.blueGrey,
       ),
-      home: Home(),
+      home: SplashScreen(),
     );
   }
 }

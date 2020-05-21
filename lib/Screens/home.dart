@@ -1,10 +1,12 @@
 import 'dart:ui';
+import 'package:dmms/CustomWidgets/heading_text_style.dart';
 import 'package:dmms/CustomWidgets/image_slider.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
 import 'package:dmms/Screens/NewActivity.dart';
 import 'package:dmms/data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,8 +14,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color.fromRGBO(22, 158, 183, 1),
+    ));
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -35,23 +42,25 @@ class _HomeState extends State<Home> {
             color: Colors.white,
           ),
         ),
+//        actions: <Widget>[
+//          Container(
+//            margin: EdgeInsets.only(right: 10),
+//            child: Icon(
+//              Icons.exit_to_app,
+//              color: Colors.white,
+//              size: 26,
+//            ),
+//          )
+//        ],
       ),
       body: ListView(
         shrinkWrap: true,
         children: <Widget>[
-          // Container(
-          //   height: 1,
-          //   color: Color.fromRGBO(22, 158, 183, 1),
-          // ),
           SizedBox(height: 20),
           Center(
             child: Text(
               'Welcome Vikas Nale',
-              style: TextStyle(
-                fontFamily: 'nunito_bold',
-                color: Colors.grey[800],
-                fontSize: 20,
-              ),
+              style: headingTextStyle,
             ),
           ),
           SizedBox(height: 20),
@@ -77,11 +86,7 @@ class _HomeState extends State<Home> {
           Center(
             child: Text(
               'IMAGE BASED QUIZ',
-              style: TextStyle(
-                fontFamily: 'nunito_bold',
-                color: Colors.grey[800],
-                fontSize: 20,
-              ),
+              style:  headingTextStyle,
             ),
           ),
           SizedBox(height: 20),
@@ -130,11 +135,7 @@ class _HomeState extends State<Home> {
           Center(
             child: Text(
               'VIDEO BASED QUIZ',
-              style: TextStyle(
-                fontFamily: 'nunito_bold',
-                color: Colors.grey[800],
-                fontSize: 20,
-              ),
+              style:  headingTextStyle,
             ),
           ),
           SizedBox(height: 5),
