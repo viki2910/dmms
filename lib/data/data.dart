@@ -17,6 +17,13 @@ final List<DashCard> cards = [
   DashCard( imageUrl: 'assets/logout.png', name: 'Logout'),
 ];
 
+final List<DashCard> videoQuiz = [
+  DashCard( imageUrl: 'assets/my-paper.png', name: 'QUIZ FOR ESIC, PGI, DSSSB EXAM'),
+  DashCard( imageUrl: 'assets/quiz.png', name: 'DMMS SPECIAL'),
+  DashCard( imageUrl: 'assets/view-solution.png', name: 'TARGET AIIMS 2020'),
+
+];
+
 
 final List<ImageQuiz> imageQuiz = [
   ImageQuiz(title:'Quiz for all AIIMS Exam', description:'Based on Jodhpur AIIMS, Delhi AIIMS, Patna AIIMS all exams'),

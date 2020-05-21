@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
               crossAxisCount: 3,
               children: List.generate(cards.length, (index) {
                 DashCard card = cards[index];
-                return buildCardItem(card);
+                return buildCardItem(card,12);
               }),
             ),
           ),
@@ -101,7 +101,26 @@ class _HomeState extends State<Home> {
                 if (index < imageQuiz.length)
                   return buildImageQuizItem(index);
                 else
-                  return null;
+                  return Container(
+                    margin: EdgeInsets.symmetric(vertical: 10,horizontal: 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                          'See More',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black87
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.grey[800],
+                          size: 15,
+                        )
+                      ],
+                    ),
+                  );
               },
               separatorBuilder: (context, index) {
                 return Divider(
@@ -111,13 +130,54 @@ class _HomeState extends State<Home> {
               },
             ),
           ),
+          SizedBox(height: 20),
+          ImageSlider(60, imageList),
+          SizedBox(height: 30),
+          Center(
+            child: Text(
+              'VIDEO BASED QUIZ',
+              style: TextStyle(
+                fontFamily: 'nunito_bold',
+                color: Colors.grey[800],
+                fontSize: 20,
+              ),
+            ),
+          ),
+          SizedBox(height: 5),
+          Container(
+            child: GridView.count(
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
+              padding: EdgeInsets.all(10),
+              crossAxisCount: 3,
+              children: List.generate(videoQuiz.length, (index) {
+                DashCard videoQuizCard = videoQuiz[index];
+                return buildCardItem(videoQuizCard,9);
+              }),
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            color: Color.fromRGBO(22, 158, 183, 1),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                '2020 DMMS, All rights reserved',
+                style:TextStyle(
+                  fontFamily: 'nunito_bold',
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 
 //dashboard card
-  Widget buildCardItem(DashCard card) {
+  Widget buildCardItem(DashCard card, double fontsize) {
     return Padding(
       padding: const EdgeInsets.all(3),
       child: Stack(
@@ -157,7 +217,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                       fontFamily: 'nunito_bold',
                       color: Colors.grey[800],
-                      fontSize: 12,
+                      fontSize: fontsize,
                     ),
                   ),
                 ),
