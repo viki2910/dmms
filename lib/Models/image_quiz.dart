@@ -7,4 +7,10 @@ class ImageQuiz {
     this.title,
     this.description,
   });
+  factory ImageQuiz.fromJson(Map<String, dynamic> json) {
+    return ImageQuiz(
+      title: json['title'],
+      description: json['description'],
+    );
+  }
 }
