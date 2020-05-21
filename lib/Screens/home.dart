@@ -4,6 +4,7 @@ import 'package:dmms/CustomWidgets/image_slider.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
 import 'package:dmms/Screens/NewActivity.dart';
 import 'package:dmms/data/data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -90,11 +91,32 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemCount: imageQuiz.length + 1,
+              physics: ScrollPhysics(),
+              itemBuilder: (context, index) {
+                if (index < imageQuiz.length)
+                  return buildImageQuizItem(index);
+                else
+                  return null;
+              },
+              separatorBuilder: (context, index) {
+                return Divider(
+                  height: 1,
+                  color: Colors.grey[400],
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
   }
 
+//dashboard card
   Widget buildCardItem(DashCard card) {
     return Padding(
       padding: const EdgeInsets.all(3),
@@ -149,10 +171,10 @@ class _HomeState extends State<Home> {
                 color: Colors.transparent,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12),
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (_) => newActivity()
-                    ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => newActivity()),
                     );
                   },
                   splashColor: Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
@@ -162,6 +184,59 @@ class _HomeState extends State<Home> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  //image quiz item
+  Widget buildImageQuizItem(int index) {
+    return Container(
+      color: Colors.grey[50],
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(top: 5),
+              child: Image(
+                image: AssetImage('assets/quiz.png'),
+                height: 36,
+                width: 36,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    imageQuiz[index].title,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'nunito_bold'),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 110,
+                    child: Text(
+                      imageQuiz[index].description,
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 15,
+                      ),
+                      overflow: TextOverflow.clip,
+                      maxLines: 5,
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
