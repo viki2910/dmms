@@ -9,7 +9,7 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpinKitThreeBounce(
-      color: Color.fromRGBO(22, 158, 183, 1),
+      color: color,
       size: 30,
     );
   }
