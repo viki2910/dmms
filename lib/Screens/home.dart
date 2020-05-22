@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
           SizedBox(height: 20),
           Center(
             child: Text(
-              'Welcome Vikas Nale',
+              'Welcome Aditya Terse',
               style: headingTextStyle,
             ),
           ),

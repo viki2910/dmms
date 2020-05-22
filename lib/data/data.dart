@@ -8,13 +8,13 @@ final List<DashCard> cards = [
   DashCard( imageUrl: 'assets/live-test.png', name: 'Live Test'),
   DashCard( imageUrl: 'assets/my-paper.png', name: 'My Paper'),
   DashCard( imageUrl: 'assets/view-solution.png', name: 'View Solution'),
-  DashCard( imageUrl: 'assets/join-test.png', name: 'Join TestSeries'),
+  DashCard( imageUrl: 'assets/join-test.webp', name: 'Join TestSeries'),
   DashCard( imageUrl: 'assets/study-material.png', name: 'Study Material'),
-  DashCard( imageUrl: 'assets/current-affairs.png', name: 'Current Affairs'),
+  DashCard( imageUrl: 'assets/current-affairs.webp', name: 'Current Affairs'),
   DashCard( imageUrl: 'assets/vacancy-info.png', name: 'Vacancy Information'),
   DashCard( imageUrl: 'assets/profile-info.png', name: 'Profile Information'),
-  DashCard( imageUrl: 'assets/help-support.png', name: 'Help & Support'),
-  DashCard( imageUrl: 'assets/change-password.png', name: 'Change Password'),
+  DashCard( imageUrl: 'assets/help-support.webp', name: 'Help & Support'),
+  DashCard( imageUrl: 'assets/change-password.webp', name: 'Change Password'),
   DashCard( imageUrl: 'assets/logout.png', name: 'Logout'),
 ];
 
@@ -33,7 +33,7 @@ final List<ImageQuiz> imageQuiz = [
 ];
 
 List<AssetImage> imageList = [
-  AssetImage('assets/car1.jpg'),
-  AssetImage('assets/car2.jpg'),
+  AssetImage('assets/car1.webp'),
+  AssetImage('assets/car2.webp'),
   // AssetImage('assets/change-password.png'),
 ];
