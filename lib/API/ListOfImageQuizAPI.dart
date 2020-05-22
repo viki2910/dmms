@@ -19,7 +19,9 @@ class ListOfImageQuizAPI extends StatelessWidget
 
           return snapshot.hasData
               ? list(a: snapshot.data)
-              : Center(child: CircularProgressIndicator());
+              : Center(child: CircularProgressIndicator(
+            backgroundColor: Colors.red,
+          ));
         },
       );
   }

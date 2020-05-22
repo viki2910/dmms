@@ -36,21 +36,21 @@ class _SplashScreenState extends State<SplashScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Colors.black.withOpacity(0.4),
-                    Colors.black87.withOpacity(0.4),
-                    Colors.black54.withOpacity(0.3),
-                    Colors.black38.withOpacity(0.4),
-                  ],
-                  stops: [0.1, 0.4, 0.5, 0.9],
+              child:Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Colors.black.withOpacity(0.4),
+                      Colors.black87.withOpacity(0.4),
+                      Colors.black54.withOpacity(0.3),
+                      Colors.black38.withOpacity(0.4),
+                    ],
+                    stops: [0.1, 0.4, 0.5, 0.9],
+                  ),
                 ),
               ),
             ),
