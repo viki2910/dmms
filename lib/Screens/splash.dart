@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dmms/CustomWidgets/loader.dart';
 import 'package:dmms/Screens/home.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/splash_bg.jpg'),
+                  image: AssetImage('assets/splash_bg.webp'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -61,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 children: <Widget>[
                   Center(
                     child: Image(
-                      image: AssetImage('assets/logo.png'),
+                      image: AssetImage('assets/logo.webp'),
                       height: 140,
                       width: 140,
                       fit: BoxFit.cover,

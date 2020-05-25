@@ -1,3 +1,4 @@
+import 'package:dmms/Screens/Login.dart';
 import 'package:dmms/Screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey[50],
         primaryColor: Colors.blueGrey,
       ),
-      home: SplashScreen(),
+      home: LoginScreen(),
     );
   }
 }

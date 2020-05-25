@@ -258,7 +258,7 @@ class _HomeState extends State<Home> {
             Container(
               margin: EdgeInsets.only(top: 5),
               child: Image(
-                image: AssetImage('assets/quiz.png'),
+                image: AssetImage('assets/quiz.webp'),
                 height: 36,
                 width: 36,
               ),

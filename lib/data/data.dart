@@ -5,23 +5,23 @@ import 'package:flutter/material.dart';
 
 
 final List<DashCard> cards = [
-  DashCard( imageUrl: 'assets/live-test.png', name: 'Live Test'),
-  DashCard( imageUrl: 'assets/my-paper.png', name: 'My Paper'),
-  DashCard( imageUrl: 'assets/view-solution.png', name: 'View Solution'),
+  DashCard( imageUrl: 'assets/live-test.webp', name: 'Live Test'),
+  DashCard( imageUrl: 'assets/my-paper.webp', name: 'My Paper'),
+  DashCard( imageUrl: 'assets/view-solution.webp', name: 'View Solution'),
   DashCard( imageUrl: 'assets/join-test.webp', name: 'Join TestSeries'),
-  DashCard( imageUrl: 'assets/study-material.png', name: 'Study Material'),
+  DashCard( imageUrl: 'assets/study-material.webp', name: 'Study Material'),
   DashCard( imageUrl: 'assets/current-affairs.webp', name: 'Current Affairs'),
-  DashCard( imageUrl: 'assets/vacancy-info.png', name: 'Vacancy Information'),
-  DashCard( imageUrl: 'assets/profile-info.png', name: 'Profile Information'),
+  DashCard( imageUrl: 'assets/vacancy-info.webp', name: 'Vacancy Information'),
+  DashCard( imageUrl: 'assets/profile-info.webp', name: 'Profile Information'),
   DashCard( imageUrl: 'assets/help-support.webp', name: 'Help & Support'),
   DashCard( imageUrl: 'assets/change-password.webp', name: 'Change Password'),
-  DashCard( imageUrl: 'assets/logout.png', name: 'Logout'),
+  DashCard( imageUrl: 'assets/logout.webp', name: 'Logout'),
 ];
 
 final List<DashCard> videoQuiz = [
-  DashCard( imageUrl: 'assets/my-paper.png', name: 'QUIZ FOR ESIC, PGI, DSSSB EXAM'),
-  DashCard( imageUrl: 'assets/quiz.png', name: 'DMMS SPECIAL'),
-  DashCard( imageUrl: 'assets/view-solution.png', name: 'TARGET AIIMS 2020'),
+  DashCard( imageUrl: 'assets/my-paper.webp', name: 'QUIZ FOR ESIC, PGI, DSSSB EXAM'),
+  DashCard( imageUrl: 'assets/quiz.webp', name: 'DMMS SPECIAL'),
+  DashCard( imageUrl: 'assets/view-solution.webp', name: 'TARGET AIIMS 2020'),
 
 ];
 
