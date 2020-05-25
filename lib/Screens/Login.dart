@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'home.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -74,7 +76,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (_)=>Home()
+                          ));
+                        },
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 12),
                           child: Text(
