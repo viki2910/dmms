@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -34,20 +34,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height: 180),
+                    SizedBox(height: 140),
                     Image(
                       image: AssetImage('assets/logo_new.png'),
                       height:75,
                       width: MediaQuery.of(context).size.width,
                     ),
-                    SizedBox(height: 40),
+                    SizedBox(height: 20),
+                    TextField(
+                      decoration: editTextStyle.copyWith(hintText: 'Name').copyWith(
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15),
                     TextField(
                       decoration: editTextStyle.copyWith(hintText: 'Mobile No.').copyWith(
                         prefixIcon: Icon(Icons.phone_android),
                       ),
                       keyboardType: TextInputType.number,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 15),
+                    TextField(
+                      decoration: editTextStyle.copyWith(hintText: 'Email-ID').copyWith(
+                        prefixIcon: Icon(
+                          Icons.email,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15),
                     TextField(
                       obscureText: true,
                       decoration: editTextStyle.copyWith(hintText: 'Password').copyWith(
@@ -56,7 +72,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 15),
+                    TextField(
+                      decoration: editTextStyle.copyWith(hintText: 'Select State').copyWith(
+                        prefixIcon: Icon(
+                          Icons.location_city,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15),
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
@@ -78,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 12),
                           child: Text(
-                            'Login',
+                            'Create Account',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -87,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Container(
                       height: 45,
                       width: 45,

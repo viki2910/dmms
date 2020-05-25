@@ -33,7 +33,8 @@ final List<ImageQuiz> imageQuiz = [
 ];
 
 List<AssetImage> imageList = [
-  AssetImage('assets/car1.webp'),
-  AssetImage('assets/car2.webp'),
+  AssetImage('assets/home-slider-1.png'),
+  AssetImage('assets/home-slider-2.png'),
+  AssetImage('assets/home-slider-3.png'),
   // AssetImage('assets/change-password.png'),
 ];

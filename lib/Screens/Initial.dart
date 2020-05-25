@@ -1,14 +1,18 @@
 import 'package:dmms/CustomWidgets/edit_text_style.dart';
+import 'package:dmms/CustomWidgets/image_slider.dart';
+import 'package:dmms/Screens/Login.dart';
+import 'package:dmms/Screens/Register.dart';
+import 'package:dmms/data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class LoginScreen extends StatefulWidget {
+class InitialScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _InitialScreenState createState() => _InitialScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _InitialScreenState extends State<InitialScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -34,29 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height: 180),
+                    SizedBox(height: 170),
                     Image(
                       image: AssetImage('assets/logo_new.png'),
                       height:75,
                       width: MediaQuery.of(context).size.width,
                     ),
                     SizedBox(height: 40),
-                    TextField(
-                      decoration: editTextStyle.copyWith(hintText: 'Mobile No.').copyWith(
-                        prefixIcon: Icon(Icons.phone_android),
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                    SizedBox(height: 20),
-                    TextField(
-                      obscureText: true,
-                      decoration: editTextStyle.copyWith(hintText: 'Password').copyWith(
-                        prefixIcon: Icon(
-                          Icons.lock_outline,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 30),
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
@@ -64,17 +52,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            Colors.orange,
-                            Colors.deepOrange,
+                            Colors.cyan,
+                            Colors.blueAccent,
                           ]
                         )
                       ),
-                      width: MediaQuery.of(context).size.width,
+                      width: 270,//MediaQuery.of(context).size.width,
                       child: FlatButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (_)=>LoginScreen()
+                          ));
+                        },
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 12),
                           child: Text(
@@ -89,21 +81,41 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: 20),
                     Container(
-                      height: 45,
-                      width: 45,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(40),
+                          borderRadius: BorderRadius.circular(30),
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.orange,
+                                Colors.deepOrange,
+                              ]
+                          )
                       ),
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_back_ios),
-                        color: Colors.white,
-                        iconSize: 22,
-                        onPressed: (){
-                          Navigator.pop(context);
+                      width:  270,//MediaQuery.of(context).size.width,
+                      child: FlatButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (_)=>RegisterScreen()
+                          ));
                         },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          child: Text(
+                            'Register',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontFamily: 'nunito_bold'),
+                          ),
+                        ),
                       ),
-                    )
+                    ),
+                    SizedBox(height: 40),
+                    ImageSlider(120, imageList),
                   ],
                 ),
               ),

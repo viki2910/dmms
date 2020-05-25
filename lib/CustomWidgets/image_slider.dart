@@ -15,7 +15,7 @@ class _ImageSliderState extends State<ImageSlider> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 0.0),
       child: Center(
         child: Container(
           decoration: BoxDecoration(
