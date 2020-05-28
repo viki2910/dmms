@@ -1,10 +1,7 @@
 import 'package:dmms/Screens/Initial.dart';
-import 'package:dmms/Screens/Login.dart';
-import 'package:dmms/Screens/Register.dart';
-import 'package:dmms/Screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Screens/home.dart';
+import 'package:dmms/Screens/ForgetPassword.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -24,7 +21,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey[50],
         primaryColor: Colors.blueGrey,
       ),
-      home: InitialScreen(),
+      home: ForgetPasswordScreen(),
     );
   }
 }

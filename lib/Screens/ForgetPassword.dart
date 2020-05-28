@@ -1,17 +1,16 @@
-import 'package:dmms/CustomWidgets/image_slider.dart';
-import 'package:dmms/Screens/Login.dart';
-import 'package:dmms/Screens/Register.dart';
-import 'package:dmms/data/data.dart';
+import 'package:dmms/CustomWidgets/edit_text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class InitialScreen extends StatefulWidget {
+import 'home.dart';
+
+class ForgetPasswordScreen extends StatefulWidget {
   @override
-  _InitialScreenState createState() => _InitialScreenState();
+  _ForgetPasswordScreenState createState() => _ForgetPasswordScreenState();
 }
 
-class _InitialScreenState extends State<InitialScreen> {
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -37,48 +36,20 @@ class _InitialScreenState extends State<InitialScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height: 170),
+                    SizedBox(height: 180),
                     Image(
                       image: AssetImage('assets/logo_new.png'),
                       height:75,
                       width: MediaQuery.of(context).size.width,
                     ),
                     SizedBox(height: 40),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Colors.cyan,
-                            Colors.blueAccent,
-                          ]
-                        )
+                    TextField(
+                      decoration: editTextStyle.copyWith(hintText: 'Registered Mobile No.').copyWith(
+                        prefixIcon: Icon(Icons.phone_android),
                       ),
-                      width: 270,//MediaQuery.of(context).size.width,
-                      child: FlatButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (_)=>LoginScreen()
-                          ));
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontFamily: 'nunito_bold'),
-                          ),
-                        ),
-                      ),
+                      keyboardType: TextInputType.number,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 30),
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
@@ -91,20 +62,18 @@ class _InitialScreenState extends State<InitialScreen> {
                               ]
                           )
                       ),
-                      width:  270,//MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width,
                       child: FlatButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (_)=>RegisterScreen()
-                          ));
+
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 12),
                           child: Text(
-                            'Register',
+                            'Submit',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -113,8 +82,23 @@ class _InitialScreenState extends State<InitialScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 40),
-                    ImageSlider(120,0,imageList),
+                    SizedBox(height: 20),
+                    Container(
+                      height: 45,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_back_ios),
+                        color: Colors.white,
+                        iconSize: 22,
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                      ),
+                    )
                   ],
                 ),
               ),

@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:dmms/CustomWidgets/heading_text_style.dart';
 import 'package:dmms/CustomWidgets/image_slider.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
-import 'package:dmms/Screens/NewActivity.dart';
 import 'package:dmms/data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,16 +41,6 @@ class _HomeState extends State<Home> {
             color: Colors.white,
           ),
         ),
-//        actions: <Widget>[
-//          Container(
-//            margin: EdgeInsets.only(right: 10),
-//            child: Icon(
-//              Icons.exit_to_app,
-//              color: Colors.white,
-//              size: 26,
-//            ),
-//          )
-//        ],
       ),
       body: ListView(
         shrinkWrap: true,
@@ -64,7 +53,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20),
-          ImageSlider(60, imageList),
+          ImageSlider(60,20,imageList),
           SizedBox(height: 15),
           Container(
             margin: EdgeInsets.all(10),
@@ -81,7 +70,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20),
-          ImageSlider(120, imageList),
+          ImageSlider(120,20, imageList),
           SizedBox(height: 30),
           Center(
             child: Text(
@@ -130,7 +119,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20),
-          ImageSlider(60, imageList),
+          ImageSlider(60,20, imageList),
           SizedBox(height: 30),
           Center(
             child: Text(
@@ -228,10 +217,10 @@ class _HomeState extends State<Home> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(12),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => newActivity()),
-                        );
+//                        Navigator.push(
+//                          context,
+//                          MaterialPageRoute(builder: (_) => newActivity()),
+//                        );
                       },
                       splashColor: Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
                       highlightColor: Colors.transparent,
