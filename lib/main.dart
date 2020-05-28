@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey[50],
         primaryColor: Colors.blueGrey,
       ),
-      home: ForgetPasswordScreen(),
+      home: InitialScreen(),
     );
   }
 }
