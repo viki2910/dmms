@@ -1,8 +1,8 @@
 import 'dart:ui';
+
 import 'package:dmms/CustomWidgets/heading_text_style.dart';
 import 'package:dmms/CustomWidgets/image_slider.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
-import 'package:dmms/Screens/MyPapers.dart';
 import 'package:dmms/data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +14,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -33,7 +31,7 @@ class _HomeState extends State<Home> {
           ),
           onPressed: () {},
         ),
-        backgroundColor:Color.fromRGBO(49, 139, 176, 1),
+        backgroundColor: Color.fromRGBO(49, 139, 176, 1),
         title: Text(
           'DMMS Nursing Academy',
           style: TextStyle(
@@ -54,29 +52,28 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20),
-          ImageSlider(60,20,imageList),
+          ImageSlider(60, 20, imageList),
           SizedBox(height: 15),
           Container(
             margin: EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
-              child: GridView.count(
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                crossAxisCount: 3,
-                children: List.generate(cards.length, (index) {
-                  DashCard card = cards[index];
-                  return buildCardItem(card,12);
-                }),
-
+            child: GridView.count(
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
+              crossAxisCount: 3,
+              children: List.generate(cards.length, (index) {
+                DashCard card = cards[index];
+                return buildCardItem(card, 12);
+              }),
             ),
           ),
           SizedBox(height: 20),
-          ImageSlider(120,20, imageList),
+          ImageSlider(120, 20, imageList),
           SizedBox(height: 30),
           Center(
             child: Text(
               'IMAGE BASED QUIZ',
-              style:  headingTextStyle,
+              style: headingTextStyle,
             ),
           ),
           SizedBox(height: 20),
@@ -91,16 +88,13 @@ class _HomeState extends State<Home> {
                   return buildImageQuizItem(index);
                 else
                   return Container(
-                    margin: EdgeInsets.symmetric(vertical: 10,horizontal: 0),
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Text(
                           'See More',
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black87
-                          ),
+                          style: TextStyle(fontSize: 14, color: Colors.black87),
                         ),
                         Icon(
                           Icons.arrow_forward_ios,
@@ -120,12 +114,12 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20),
-          ImageSlider(60,20, imageList),
+          ImageSlider(60, 20, imageList),
           SizedBox(height: 30),
           Center(
             child: Text(
               'VIDEO BASED QUIZ',
-              style:  headingTextStyle,
+              style: headingTextStyle,
             ),
           ),
           SizedBox(height: 5),
@@ -137,7 +131,7 @@ class _HomeState extends State<Home> {
               crossAxisCount: 3,
               children: List.generate(videoQuiz.length, (index) {
                 DashCard videoQuizCard = videoQuiz[index];
-                return buildCardItem(videoQuizCard,9);
+                return buildCardItem(videoQuizCard, 9);
               }),
             ),
           ),
@@ -148,7 +142,7 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.all(15.0),
               child: Text(
                 '2020 DMMS, All rights reserved',
-                style:TextStyle(
+                style: TextStyle(
                   fontFamily: 'nunito_bold',
                   color: Colors.white,
                 ),
@@ -167,69 +161,71 @@ class _HomeState extends State<Home> {
       child: Container(
         margin: EdgeInsets.all(10),
         child: Stack(
-            children: <Widget>[
-              Container(
+          children: <Widget>[
+            Container(
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    offset: Offset(0, -1),
+                    blurRadius: 4,
+                  )
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    child: Image(
+                      height: 36,
+                      width: 36,
+                      image: AssetImage(card.imageUrl),
+                    ),
+                  ),
+                  SizedBox(height: 6),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 7),
+                    child: Text(
+                      card.name,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'nunito_bold',
+                        color: Colors.grey[800],
+                        fontSize: fontsize,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned.fill(
+              child: Container(
                 height: 100,
                 width: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      offset: Offset(0, -1),
-                      blurRadius: 4,
-                    )
-                  ],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                      child: Image(
-                        height: 36,
-                        width: 36,
-                        image: AssetImage(card.imageUrl),
-                      ),
-                    ),
-                    SizedBox(height: 6),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 7),
-                      child: Text(
-                        card.name,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'nunito_bold',
-                          color: Colors.grey[800],
-                          fontSize: fontsize,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Positioned.fill(
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      onTap: () {
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12),
+                    onTap: () {
+                      if (card.onClick != null)
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => MyPapers()),
+                          MaterialPageRoute(builder: (_) => card.onClick),
                         );
-                      },
-                      splashColor: Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
-                      highlightColor: Colors.transparent,
-                    ),
+                    },
+                    splashColor:
+                        Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
+                    highlightColor: Colors.transparent,
                   ),
                 ),
               ),
-            ],
+            ),
+          ],
         ),
       ),
     );
@@ -288,6 +284,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-
-
