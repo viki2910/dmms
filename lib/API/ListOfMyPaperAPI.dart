@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 class ListOfMyPaperAPI extends StatelessWidget
 {
   ListOfMyPaperAPI();
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Paper>>(
@@ -59,62 +58,116 @@ class list extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     this.context = context;
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: ListView.separated(
-        shrinkWrap: true,
-        itemCount: paper.length+1,
-        physics: ScrollPhysics(),
-        itemBuilder: (context, index) {
-          if (index < paper.length)
-            return buildPaperListItem(paper[index]);
-          else
-            return Container(
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    'See More',
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black87
-                    ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.grey[800],
-                    size: 15,
-                  )
-                ],
+    return ListView(
+      shrinkWrap: true,
+      physics: ScrollPhysics(),
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+          width: MediaQuery.of(context).size.width,
+          child: GridView.count(
+            childAspectRatio: 4/5.8,
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            crossAxisCount: 2,
+            children: List.generate(paper.length, (index) {
+              return buildPaperItem(paper[index]);
+            }),
+
+          ),
+        ),
+        Container(
+          color: Color.fromRGBO(49, 139, 176, 1),
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              '2020 DMMS, All rights reserved',
+              style:TextStyle(
+                fontFamily: 'nunito_bold',
+                color: Colors.white,
               ),
-            );
-        },
-        separatorBuilder: (context, index) {
-          return Divider(
-            height: 1,
-            color: Colors.grey[400],
-          );
-        },
+              textAlign: TextAlign.center,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  //each paper item
+  Widget buildPaperItem(Paper paper) {
+    TextStyle textStyle= TextStyle(
+      color: Colors.grey[600],
+      fontSize: 13,
+    );
+    return Container(
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          color: Colors.grey[300],
+          width: 1,
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(height: 2),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              paper.papertitle,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color.fromRGBO(49, 139, 176, 1),
+                fontSize: 14,
+              ),
+            ),
+          ),
+          SizedBox(height: 8),
+          Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
+          SizedBox(height: 8),
+          Text(
+            'Detailed Solutions',
+            style:textStyle,
+          ),
+          SizedBox(height: 8),
+          Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
+          SizedBox(height: 8),
+          Text(
+            'Total Questions: ${paper.numberofquestion}',
+            style:textStyle,
+          ),
+          SizedBox(height: 8),
+          Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
+          SizedBox(height: 8),
+          Text(
+            'Time: ${paper.duration} Minutes',
+            style:textStyle,
+          ),
+          SizedBox(height: 8),
+          Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
+          SizedBox(height: 10),
+          RaisedButton(
+            color: Color.fromRGBO(49, 139, 176, 1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Text(
+              'START TEST',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'nunito_bold',
+                  fontSize: 13
+              ),
+            ),
+            onPressed: (){},
+          )
+        ],
       ),
     );
   }
 
-  //image quiz item
-  Widget buildPaperListItem(Paper paper) {
-    return Container(
-      color: Colors.grey[50],
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        child: Column(
-          children: <Widget>[
-            Text(paper.papertitle),
-            Text("Detailed Solutions."),
-            Text("Total Question: "+paper.numberofquestion.toString()),
-            Text("Time: "+paper.duration.toString()+" Minutes")
-          ],
-        )
-      ),
-    );
-  }
+
 }

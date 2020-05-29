@@ -2,11 +2,11 @@ import 'dart:ui';
 import 'package:dmms/CustomWidgets/heading_text_style.dart';
 import 'package:dmms/CustomWidgets/image_slider.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
+import 'package:dmms/Screens/MyPapers.dart';
 import 'package:dmms/data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'newActivity.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -220,7 +220,7 @@ class _HomeState extends State<Home> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => newActivity()),
+                          MaterialPageRoute(builder: (_) => MyPapers()),
                         );
                       },
                       splashColor: Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
