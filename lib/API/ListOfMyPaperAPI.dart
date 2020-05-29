@@ -47,6 +47,8 @@ List<Paper> parsePapers(String responseBody) {
 
   return tmp1.map<Paper>((json) => Paper.fromJson(json)).toList();
 }
+
+
 class list extends StatelessWidget {
 
   final List<Paper> paper;
