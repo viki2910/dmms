@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color.fromRGBO(22, 158, 183, 1),
+      statusBarColor: Color.fromRGBO(49, 139, 176, 1),
     ));
     return Scaffold(
       backgroundColor: Colors.white,
@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
           ),
           onPressed: () {},
         ),
-        backgroundColor: Color.fromRGBO(22, 158, 183, 1),
+        backgroundColor:Color.fromRGBO(49, 139, 176, 1),
         title: Text(
           'DMMS Nursing Academy',
           style: TextStyle(
@@ -143,7 +143,7 @@ class _HomeState extends State<Home> {
           ),
           SizedBox(height: 20),
           Container(
-            color: Color.fromRGBO(22, 158, 183, 1),
+            color: Color.fromRGBO(49, 139, 176, 1),
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Text(
