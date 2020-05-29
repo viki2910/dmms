@@ -1,21 +1,22 @@
 import 'package:dmms/Models/dashboard_cards.dart';
 import 'package:dmms/Models/image_quiz.dart';
+import 'package:dmms/Screens/MyPapers.dart';
 import 'package:flutter/material.dart';
 
 
 
 final List<DashCard> cards = [
-  DashCard( imageUrl: 'assets/live-test.webp', name: 'Live Test'),
-  DashCard( imageUrl: 'assets/my-paper.webp', name: 'My Paper'),
-  DashCard( imageUrl: 'assets/view-solution.webp', name: 'View Solution'),
-  DashCard( imageUrl: 'assets/join-test.webp', name: 'Join TestSeries'),
-  DashCard( imageUrl: 'assets/study-material.webp', name: 'Study Material'),
-  DashCard( imageUrl: 'assets/current-affairs.webp', name: 'Current Affairs'),
-  DashCard( imageUrl: 'assets/vacancy-info.webp', name: 'Vacancy Information'),
-  DashCard( imageUrl: 'assets/profile-info.webp', name: 'Profile Information'),
-  DashCard( imageUrl: 'assets/help-support.webp', name: 'Help & Support'),
-  DashCard( imageUrl: 'assets/change-password.webp', name: 'Change Password'),
-  DashCard( imageUrl: 'assets/logout.webp', name: 'Logout'),
+  DashCard( imageUrl: 'assets/live-test.webp', name: 'Live Test',onClick: null),
+  DashCard( imageUrl: 'assets/my-paper.webp', name: 'My Paper',onClick:MyPapers()),
+  DashCard( imageUrl: 'assets/view-solution.webp', name: 'View Solution',onClick: null),
+  DashCard( imageUrl: 'assets/join-test.webp', name: 'Join TestSeries',onClick: null),
+  DashCard( imageUrl: 'assets/study-material.webp', name: 'Study Material',onClick: null),
+  DashCard( imageUrl: 'assets/current-affairs.webp', name: 'Current Affairs',onClick: null),
+  DashCard( imageUrl: 'assets/vacancy-info.webp', name: 'Vacancy Information',onClick: null),
+  DashCard( imageUrl: 'assets/profile-info.webp', name: 'Profile Information',onClick: null),
+  DashCard( imageUrl: 'assets/help-support.webp', name: 'Help & Support',onClick: null),
+  DashCard( imageUrl: 'assets/change-password.webp', name: 'Change Password',onClick: null),
+  DashCard( imageUrl: 'assets/logout.webp', name: 'Logout',onClick: null),
 ];
 
 final List<DashCard> videoQuiz = [
