@@ -1,4 +1,3 @@
-import 'package:dmms/Models/Paper2.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
 import 'package:dmms/Models/image_quiz.dart';
 import 'package:flutter/material.dart';
@@ -38,12 +37,4 @@ List<AssetImage> imageList = [
   AssetImage('assets/home-slider-2.png'),
   AssetImage('assets/home-slider-3.png'),
   // AssetImage('assets/change-password.png'),
-];
-
-final List<Papers>  paperList=[
-  Papers('DEMO PAPER',25,40),
-  Papers('DEMO PAPER 2',25,25),
-  Papers('DEMO PAPER 3',25,25),
-  Papers('DEMO PAPER 4',25,25),
-  Papers('Live Test Series 1',65,60),
 ];
