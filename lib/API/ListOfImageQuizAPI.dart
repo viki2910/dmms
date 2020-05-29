@@ -27,12 +27,14 @@ class ListOfImageQuizAPI extends StatelessWidget
 }
 
 Future<List<ImageQuiz>> fetchList(http.Client client) async {
+  var Request={"MethodName":"mypaper","memberid":"RJ19617725"};
   final http.Response response =
-  await http.post('http://10.0.2.2:3000/check', headers: <String, String>{
+  await http.post('https://www.dmmsmedicalandnursingacademy.com/api/android_service.aspx', headers: <String, String>{
     'Content-Type': 'application/json; charset=UTF-8',
   },body: jsonEncode(<String, String>{
-    'title': "Hello World",
+    "Request":Request.toString()
   }),);
+
   // Use the compute function to run parsePhotos in a separate isolate.
   return compute(parsePhotos, response.body);
 }

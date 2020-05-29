@@ -6,6 +6,7 @@ import 'package:dmms/data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'newActivity.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -217,10 +218,10 @@ class _HomeState extends State<Home> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(12),
                       onTap: () {
-//                        Navigator.push(
-//                          context,
-//                          MaterialPageRoute(builder: (_) => newActivity()),
-//                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => newActivity()),
+                        );
                       },
                       splashColor: Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
                       highlightColor: Colors.transparent,
