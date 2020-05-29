@@ -35,13 +35,17 @@ Future<List<Paper>> fetchList(http.Client client) async {
   });
   // Use the compute function to run parsePapers in a separate isolate.
 
-print(json.decode(response.body));
+//print(json.decode(response.body));
+  
+  
   return compute(parsePapers,response.body);
 }
 List<Paper> parsePapers(String responseBody) {
-  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+  var tmp = json.decode(responseBody);
+  var tmp1 = tmp["data"] as List;
+  //final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
 
-  return parsed.map<Paper>((json) => Paper.fromJson(json)).toList();
+  return tmp1.map<Paper>((json) => Paper.fromJson(json)).toList();
 }
 class list extends StatelessWidget {
 
@@ -104,8 +108,8 @@ class list extends StatelessWidget {
           children: <Widget>[
             Text(paper.papertitle),
             Text("Detailed Solutions."),
-            Text("Total Question: "+paper.numberofquestion),
-            Text("Time: "+paper.duration+" Minutes")
+            Text("Total Question: "+paper.numberofquestion.toString()),
+            Text("Time: "+paper.duration.toString()+" Minutes")
           ],
         )
       ),
