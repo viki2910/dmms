@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'home.dart';
 
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
+
+
 class _LoginScreenState extends State<LoginScreen> {
+  final mobile = TextEditingController();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -45,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 40),
 
                     TextField(
+                      controller: mobile,
                       decoration: editTextStyle.copyWith(hintText: 'Mobile No.').copyWith(
                         prefixIcon: Icon(
                           Icons.phone_android,
@@ -70,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_)=>OtpScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (_)=>OtpScreen(mobile: mobile.text)));
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 12),
