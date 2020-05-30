@@ -14,12 +14,33 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit an App'),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: new Text('No'),
+          ),
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: new Text('Yes'),
+          ),
+        ],
+      ),
+    )) ?? false;
+  }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Color.fromRGBO(49, 139, 176, 1),
     ));
-    return Scaffold(
+    return new WillPopScope(
+    onWillPop: _onWillPop,
+      child:Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -152,6 +173,7 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
+    ),
     );
   }
 

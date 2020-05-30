@@ -4,6 +4,8 @@ import 'package:dmms/Screens/OtpVerification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dmms/Screens/ForgetPassword.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dmms/Screens/home.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -13,7 +15,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
+  Future<bool> checkLogIn = Future<bool>.delayed(
+    Duration(seconds: 0),
+        () async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if(prefs.getString("MemberID")!="" && prefs.getString("MemberID") !=null)
+      {
+        return true;
+      }
+      return false;
+    },
+  );
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,8 +35,21 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey[50],
         primaryColor: Colors.blueGrey,
       ),
-      home: InitialScreen(),
+      home: FutureBuilder<bool>(
+          future: checkLogIn, // a previously-obtained Future<String> or null
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.hasData) {
+              if(snapshot.data==false)
+                return InitialScreen();
+              else
+                return Home();    
+            }
+            return CircularProgressIndicator();
+        }
+      ),
     );
   }
+
 }
+
 

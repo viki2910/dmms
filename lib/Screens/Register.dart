@@ -1,47 +1,22 @@
+import 'dart:math';
+
 import 'package:dmms/CustomWidgets/edit_text_style.dart';
 import 'package:dmms/Screens/Login.dart';
+import 'package:dmms/Screens/OtpVerification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:dmms/Models/Result.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
-class RegistrationResult{
-  final String statusCode;
-  final String status;
-  final List<RegistrationData> data;
-  RegistrationResult({this.statusCode,this.status,this.data});
-  factory RegistrationResult.fromJson(Map<String, dynamic> json) {
-    return RegistrationResult(
-        statusCode: json['statuscode'],
-        status: json['status'],
-        data:  (json['data'] as List).map<RegistrationData>((json) => RegistrationData.fromJson(json)).toList()
-    );
-  }
-}
-class RegistrationData{
-  final int status;
-  final String memberID;
-  final String password;
-  final String mobile;
 
-  RegistrationData({this.status,this.memberID,this.password,this.mobile});
-  factory RegistrationData.fromJson(Map<String, dynamic> json) {
-    return RegistrationData(
-        status: json['status'],
-        memberID: json['MEMBERID'],
-        password: json['PASSWORD'],
-        mobile: json['MOBILE']
-    );
-  }
-
-}
-Future<RegistrationResult> fetchData(http.Client client,String name,String password,String email,String mobile,String otp) async {
+Future<Result> fetchData(http.Client client,String name,String password,String email,String mobile,String otp) async {
   final http.Response response =
   await http.post('https://www.dmmsmedicalandnursingacademy.com/api/android_service.aspx', headers: <String, String>{
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -49,7 +24,7 @@ Future<RegistrationResult> fetchData(http.Client client,String name,String passw
     "Request":'{"MethodName":"register","mobile":"${mobile}","name":"${name}","email":"${email}","password":"${password}","otp":"${otp}"}'
   });
 
-  return RegistrationResult.fromJson(json.decode(response.body));
+  return Result.fromJson(json.decode(response.body));
 }
 class _RegisterScreenState extends State<RegisterScreen> {
   final name = TextEditingController();
@@ -57,7 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final email = TextEditingController();
   final password = TextEditingController();
   final state = TextEditingController();
-  Future<RegistrationResult> future;
+  Future<Result> future;
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -197,16 +172,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void submit() async {
     if(validate())
       {
+        int min = 100000; //min and max values act as your 6 digit range
+        int max = 999999;
+        var randomizer = new Random();
+        var rNum = min + randomizer.nextInt(max - min);
         print(name.text+email.text+mobile.text+password.text);
-        RegistrationResult result =await fetchData(http.Client(), name.text, password.text, email.text, mobile.text, "");
+        Result result =await fetchData(http.Client(), name.text, password.text, email.text, mobile.text, rNum.toString());
         if(result.data[0].status==1)
         {
           print("success");
           Navigator.push(context, MaterialPageRoute(
-                              builder: (_)=>LoginScreen()
+                              builder: (_)=>OtpScreen(mobile:mobile.text,otp: rNum.toString(),result: result)
                           ));
         }
         else{
+          //show user alredy registered
           print("failed!");
         }
       }
@@ -215,6 +195,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool validate() {
     if(name.text==""||email.text==""||mobile.text==""||password.text=="")
       {
+        // show all fields are required
           return false;
       }
     return true;
