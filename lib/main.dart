@@ -1,5 +1,6 @@
 import 'package:dmms/Screens/Initial.dart';
 import 'package:dmms/Screens/MyPapers.dart';
+import 'package:dmms/Screens/OtpVerification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dmms/Screens/ForgetPassword.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey[50],
         primaryColor: Colors.blueGrey,
       ),
-      home: InitialScreen(),
+      home: ForgetPasswordScreen(),
     );
   }
 }

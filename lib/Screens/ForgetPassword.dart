@@ -2,7 +2,6 @@ import 'package:dmms/CustomWidgets/edit_text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'home.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -43,13 +42,15 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       width: MediaQuery.of(context).size.width,
                     ),
                     SizedBox(height: 40),
+
                     TextField(
                       decoration: editTextStyle.copyWith(hintText: 'Registered Mobile No.').copyWith(
-                        prefixIcon: Icon(Icons.phone_android),
+                        prefixIcon: Icon(
+                          Icons.phone_android,
+                        ),
                       ),
-                      keyboardType: TextInputType.number,
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 20),
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
@@ -68,7 +69,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         onPressed: () {
-
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 12),
