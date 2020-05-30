@@ -1,7 +1,6 @@
 import 'dart:math';
-
+import 'package:dmms/CustomWidgets/Toast.dart';
 import 'package:dmms/CustomWidgets/edit_text_style.dart';
-import 'package:dmms/Screens/Login.dart';
 import 'package:dmms/Screens/OtpVerification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -180,6 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Result result =await fetchData(http.Client(), name.text, password.text, email.text, mobile.text, rNum.toString());
         if(result.data[0].status==1)
         {
+          showToast("Registration Successful", Colors.green[500]);
           print("success");
           Navigator.push(context, MaterialPageRoute(
                               builder: (_)=>OtpScreen(mobile:mobile.text,otp: rNum.toString(),result: result)
@@ -187,6 +187,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
         else{
           //show user alredy registered
+          showToast("Something went wrong or User already registered", Colors.red[500]);
           print("failed!");
         }
       }
@@ -196,6 +197,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if(name.text==""||email.text==""||mobile.text==""||password.text=="")
       {
         // show all fields are required
+        showToast("All fields required", Colors.red[500]);
           return false;
       }
     return true;

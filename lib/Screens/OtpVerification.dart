@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dmms/CustomWidgets/Toast.dart';
 import 'package:dmms/CustomWidgets/edit_text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -90,6 +91,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           if(otpValue.text=="")
                             {
                               //show otp empty
+                              showToast("OTP not entered", Colors.red[500]);
                             }
                           else{
                             checkOTP();
@@ -152,6 +154,7 @@ class _OtpScreenState extends State<OtpScreen> {
     }
     else{
       //show otp incorrect
+      showToast("Incorrect OTP", Colors.red[500]);
       print("otp incorrect");
     }
   }

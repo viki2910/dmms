@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dmms/CustomWidgets/Toast.dart';
 import 'package:dmms/CustomWidgets/edit_text_style.dart';
 import 'package:dmms/Screens/OtpVerification.dart';
 import 'package:flutter/cupertino.dart';
@@ -97,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           else
                             {
                               //show alert mobile incorrect
+                              showToast("Incorrect Mobile No.", Colors.red[500]);
                             }
                           },
                         child: Padding(
@@ -146,10 +148,12 @@ class _LoginScreenState extends State<LoginScreen> {
     if(result.data[0].status==1)
     {
       print("ReqSuccess");
+      showToast("OTP sent", Colors.green[500]);
       Navigator.push(context, MaterialPageRoute(builder: (_)=>OtpScreen(mobile: mobile.text,otp:rNum.toString(),result: result)));
     }
     else{
       //show user not registered
+      showToast("User not registered", Colors.red[500]);
       print("ReqFailed");
     }
 
