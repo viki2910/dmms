@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20),
-          ImageSlider(60, 20, imageList),
+          ImageSlider(100, 20, imageList),
           SizedBox(height: 15),
           Container(
             margin: EdgeInsets.all(10),
@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20),
-          ImageSlider(120, 20, imageList),
+          ImageSlider(140, 20, imageList),
           SizedBox(height: 30),
           Center(
             child: Text(
@@ -116,7 +116,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(height: 20),
-          ImageSlider(60, 20, imageList),
+          ImageSlider(100, 20, imageList),
           SizedBox(height: 30),
           Center(
             child: Text(

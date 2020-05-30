@@ -27,7 +27,7 @@ class _ImageSliderState extends State<ImageSlider> {
             borderRadius: true,
             autoplayDuration: Duration(seconds: 2),
             showIndicator: false,
-            boxFit: BoxFit.cover,
+            boxFit: BoxFit.fill,
             images: widget.ImageList,
           ),
         ),
