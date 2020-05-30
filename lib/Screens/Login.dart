@@ -1,8 +1,8 @@
 import 'package:dmms/CustomWidgets/edit_text_style.dart';
+import 'package:dmms/Screens/OtpVerification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'home.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,33 +43,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: MediaQuery.of(context).size.width,
                     ),
                     SizedBox(height: 40),
+
                     TextField(
                       decoration: editTextStyle.copyWith(hintText: 'Mobile No.').copyWith(
-                        prefixIcon: Icon(Icons.phone_android),
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                    SizedBox(height: 20),
-                    TextField(
-                      obscureText: true,
-                      decoration: editTextStyle.copyWith(hintText: 'Password').copyWith(
                         prefixIcon: Icon(
-                          Icons.lock_outline,
+                          Icons.phone_android,
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 20),
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Colors.orange,
-                            Colors.deepOrange,
-                          ]
-                        )
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.orange,
+                                Colors.deepOrange,
+                              ]
+                          )
                       ),
                       width: MediaQuery.of(context).size.width,
                       child: FlatButton(
@@ -77,9 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (_)=>Home()
-                          ));
+                          Navigator.push(context, MaterialPageRoute(builder: (_)=>OtpScreen()));
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 12),

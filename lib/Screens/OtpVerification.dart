@@ -70,6 +70,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         onPressed: () {
+                          Navigator.push(context,MaterialPageRoute(builder: (_)=>Home()));
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 12),
