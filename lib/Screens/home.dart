@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:dmms/CustomWidgets/appbar.dart';
 import 'package:dmms/CustomWidgets/heading_text_style.dart';
 import 'package:dmms/CustomWidgets/image_slider.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
@@ -42,26 +42,7 @@ class _HomeState extends State<Home> {
     onWillPop: _onWillPop,
       child:Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            color: Colors.white,
-            size: 30,
-          ),
-          onPressed: () {},
-        ),
-        backgroundColor: Color.fromRGBO(49, 139, 176, 1),
-        title: Text(
-          'DMMS Nursing Academy',
-          style: TextStyle(
-            fontSize: 22,
-            fontFamily: 'nunito_bold',
-            color: Colors.white,
-          ),
-        ),
-      ),
+      appBar:setAppbar('DMMS Nursing Academy'),
       body: ListView(
         shrinkWrap: true,
         children: <Widget>[
