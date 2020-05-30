@@ -1,9 +1,6 @@
 import 'package:dmms/Screens/Initial.dart';
-import 'package:dmms/Screens/MyPapers.dart';
-import 'package:dmms/Screens/OtpVerification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dmms/Screens/ForgetPassword.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
