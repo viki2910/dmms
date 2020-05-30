@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dmms/CustomWidgets/edit_text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +57,7 @@ Future<LoginResult> fetchData(http.Client client,String mobile,String otp) async
 }
 class _OtpScreenState extends State<OtpScreen> {
   final String mobile;
-  final String otp="0001234";
+  String otp;
   final otpValue = TextEditingController();
   _OtpScreenState({this.mobile});
   LoginResult result ;
@@ -164,7 +166,11 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void doReq() async {
-
+    int min = 100000; //min and max values act as your 6 digit range
+    int max = 999999;
+    var randomizer = new Random();
+    var rNum = min + randomizer.nextInt(max - min);
+    otp=rNum.toString();
     result = await fetchData(http.Client(), mobile, otp);
     if(result.data[0].status==1)
       {
