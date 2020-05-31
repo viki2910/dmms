@@ -202,7 +202,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           showToast("All fields required", Colors.red[500]);
           return false;
       }
-    else if(mobile.text!=10)
+    else if(mobile.text.length!=10)
       {
         showToast("Mobile No. is incorrect", Colors.red[500]);
         return false;
