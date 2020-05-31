@@ -79,6 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       maxLength: 10,
                       decoration: editTextStyle.copyWith(hintText: 'Mobile No.').copyWith(
                         prefixIcon: Icon(Icons.phone_android),
+                        counterText: "",
                       ),
                       keyboardType: TextInputType.number,
                     ),

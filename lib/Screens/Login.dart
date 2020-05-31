@@ -65,11 +65,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     TextField(
                       controller: mobile,
-
+                      keyboardType: TextInputType.number,
+                      maxLength: 10,
                       decoration: editTextStyle.copyWith(hintText: 'Mobile No.').copyWith(
                         prefixIcon: Icon(
                           Icons.phone_android,
                         ),
+                        counterText: "",
                       ),
                     ),
                     SizedBox(height: 20),
