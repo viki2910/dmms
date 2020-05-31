@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:dmms/CustomWidgets/NavigationDrawer.dart';
 import 'package:dmms/CustomWidgets/appbar.dart';
 import 'package:dmms/CustomWidgets/heading_text_style.dart';
@@ -18,6 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   Future<bool> _onWillPop() async {
+    Future.value(false);
     return (await showDialog(
           context: context,
           builder: (context) => new AlertDialog(
@@ -29,7 +29,10 @@ class _HomeState extends State<Home> {
                 child: new Text('No'),
               ),
               new FlatButton(
-                onPressed: () => Navigator.of(context).pop(true),
+                //onPressed: () => Navigator.of(context).pop(true),
+                onPressed: (){
+                  SystemNavigator.pop();
+                },
                 child: new Text('Yes'),
               ),
             ],
@@ -44,7 +47,7 @@ class _HomeState extends State<Home> {
       statusBarColor: Color.fromRGBO(49, 139, 176, 1),
     ));
     return new WillPopScope(
-      onWillPop: _onWillPop,
+      onWillPop: ()=>_onWillPop(),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: setAppbar('DMMS Nursing Academy'),
