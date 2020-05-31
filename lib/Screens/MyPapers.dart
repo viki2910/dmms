@@ -1,4 +1,5 @@
 import 'package:dmms/API/ListOfMyPaperAPI.dart';
+import 'package:dmms/CustomWidgets/NavigationDrawer.dart';
 import 'package:dmms/CustomWidgets/appbar.dart';
 import 'package:dmms/data/data.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class _MyPapersState extends State<MyPapers> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: setAppbar("Our Papers"),
+      drawer: NavDrawer(),
       body: ListOfMyPaperAPI(),
     );
   }

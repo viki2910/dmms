@@ -1,4 +1,6 @@
 import 'dart:ui';
+
+import 'package:dmms/CustomWidgets/NavigationDrawer.dart';
 import 'package:dmms/CustomWidgets/appbar.dart';
 import 'package:dmms/CustomWidgets/heading_text_style.dart';
 import 'package:dmms/CustomWidgets/image_slider.dart';
@@ -14,147 +16,152 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   Future<bool> _onWillPop() async {
     return (await showDialog(
-      context: context,
-      builder: (context) => new AlertDialog(
-        title: new Text('Are you sure?'),
-        content: new Text('Do you want to exit an App'),
-        actions: <Widget>[
-          new FlatButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: new Text('No'),
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit an App'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: new Text('Yes'),
+              ),
+            ],
           ),
-          new FlatButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: new Text('Yes'),
-          ),
-        ],
-      ),
-    )) ?? false;
+        )) ??
+        false;
   }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Color.fromRGBO(49, 139, 176, 1),
     ));
     return new WillPopScope(
-    onWillPop: _onWillPop,
-      child:Scaffold(
-      backgroundColor: Colors.white,
-      appBar:setAppbar('DMMS Nursing Academy'),
-      body: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          SizedBox(height: 20),
-          Center(
-            child: Text(
-              'Welcome Aditya Terse',
-              style: headingTextStyle,
-            ),
-          ),
-          SizedBox(height: 20),
-          ImageSlider(100, 20, imageList),
-          SizedBox(height: 15),
-          Container(
-            margin: EdgeInsets.all(10),
-            width: MediaQuery.of(context).size.width,
-            child: GridView.count(
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              crossAxisCount: 3,
-              children: List.generate(cards.length, (index) {
-                DashCard card = cards[index];
-                return buildCardItem(card, 12);
-              }),
-            ),
-          ),
-          SizedBox(height: 20),
-          ImageSlider(140, 20, imageList),
-          SizedBox(height: 30),
-          Center(
-            child: Text(
-              'IMAGE BASED QUIZ',
-              style: headingTextStyle,
-            ),
-          ),
-          SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: imageQuiz.length + 1,
-              physics: ScrollPhysics(),
-              itemBuilder: (context, index) {
-                if (index < imageQuiz.length)
-                  return buildImageQuizItem(index);
-                else
-                  return Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Text(
-                          'See More',
-                          style: TextStyle(fontSize: 14, color: Colors.black87),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.grey[800],
-                          size: 15,
-                        )
-                      ],
-                    ),
-                  );
-              },
-              separatorBuilder: (context, index) {
-                return Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 20),
-          ImageSlider(100, 20, imageList),
-          SizedBox(height: 30),
-          Center(
-            child: Text(
-              'VIDEO BASED QUIZ',
-              style: headingTextStyle,
-            ),
-          ),
-          SizedBox(height: 5),
-          Container(
-            child: GridView.count(
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              padding: EdgeInsets.all(10),
-              crossAxisCount: 3,
-              children: List.generate(videoQuiz.length, (index) {
-                DashCard videoQuizCard = videoQuiz[index];
-                return buildCardItem(videoQuizCard, 9);
-              }),
-            ),
-          ),
-          SizedBox(height: 20),
-          Container(
-            color: Color.fromRGBO(49, 139, 176, 1),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: setAppbar('DMMS Nursing Academy'),
+        drawer: NavDrawer(),
+        body: ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            SizedBox(height: 20),
+            Center(
               child: Text(
-                '2020 DMMS, All rights reserved',
-                style: TextStyle(
-                  fontFamily: 'nunito_bold',
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
+                'Welcome Aditya Terse',
+                style: headingTextStyle,
               ),
             ),
-          )
-        ],
+            SizedBox(height: 20),
+            ImageSlider(100, 20, imageList),
+            SizedBox(height: 15),
+            Container(
+              margin: EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width,
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
+                crossAxisCount: 3,
+                children: List.generate(cards.length, (index) {
+                  DashCard card = cards[index];
+                  return buildCardItem(card, 12);
+                }),
+              ),
+            ),
+            SizedBox(height: 20),
+            ImageSlider(140, 20, imageList),
+            SizedBox(height: 30),
+            Center(
+              child: Text(
+                'IMAGE BASED QUIZ',
+                style: headingTextStyle,
+              ),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemCount: imageQuiz.length + 1,
+                physics: ScrollPhysics(),
+                itemBuilder: (context, index) {
+                  if (index < imageQuiz.length)
+                    return buildImageQuizItem(index);
+                  else
+                    return Container(
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            'See More',
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.black87),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.grey[800],
+                            size: 15,
+                          )
+                        ],
+                      ),
+                    );
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    height: 1,
+                    color: Colors.grey[400],
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 20),
+            ImageSlider(100, 20, imageList),
+            SizedBox(height: 30),
+            Center(
+              child: Text(
+                'VIDEO BASED QUIZ',
+                style: headingTextStyle,
+              ),
+            ),
+            SizedBox(height: 5),
+            Container(
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
+                padding: EdgeInsets.all(10),
+                crossAxisCount: 3,
+                children: List.generate(videoQuiz.length, (index) {
+                  DashCard videoQuizCard = videoQuiz[index];
+                  return buildCardItem(videoQuizCard, 9);
+                }),
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              color: Color.fromRGBO(49, 139, 176, 1),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  '2020 DMMS, All rights reserved',
+                  style: TextStyle(
+                    fontFamily: 'nunito_bold',
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
-    ),
     );
   }
 
