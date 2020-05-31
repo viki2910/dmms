@@ -199,8 +199,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if(name.text==""||email.text==""||mobile.text==""||password.text=="")
       {
         // show all fields are required
-        showToast("All fields required", Colors.red[500]);
+          showToast("All fields required", Colors.red[500]);
           return false;
+      }
+    else if(mobile.text!=10)
+      {
+        showToast("Mobile No. is incorrect", Colors.red[500]);
+        return false;
+      }
+    else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email.text))
+      {
+        showToast("Email ID is Invalid", Colors.red[500]);
+        return false;
       }
     return true;
   }

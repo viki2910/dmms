@@ -8,6 +8,7 @@ import 'package:dmms/data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -40,7 +41,17 @@ class _HomeState extends State<Home> {
         )) ??
         false;
   }
-
+  Future<String> name = Future<String>.delayed(
+    Duration(seconds: 0),
+        () async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if(prefs.getString("MemberID")!="" && prefs.getString("MemberID") !=null)
+      {
+        return prefs.getString("Mobile");
+      }
+      return "";
+    },
+  );
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -58,7 +69,7 @@ class _HomeState extends State<Home> {
             SizedBox(height: 20),
             Center(
               child: Text(
-                'Welcome Aditya Terse',
+                'Welcome ${name}',
                 style: headingTextStyle,
               ),
             ),
