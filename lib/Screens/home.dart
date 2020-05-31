@@ -68,9 +68,20 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             SizedBox(height: 20),
             Center(
-              child: Text(
-                'Welcome ${name}',
-                style: headingTextStyle,
+              child: FutureBuilder<String>(
+                  future: name, // a previously-obtained Future<String> or null
+                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.hasData) {
+                        return Text(
+                          'Welcome ${snapshot.data}',
+                          style: headingTextStyle,
+                        );
+                    }
+                    return Text(
+                      'Welcome ...',
+                      style: headingTextStyle,
+                    );
+                  }
               ),
             ),
             SizedBox(height: 20),
