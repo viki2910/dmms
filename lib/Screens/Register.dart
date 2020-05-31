@@ -76,6 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(height: 15),
                     TextField(
                       controller: mobile,
+                      maxLength: 10,
                       decoration: editTextStyle.copyWith(hintText: 'Mobile No.').copyWith(
                         prefixIcon: Icon(Icons.phone_android),
                       ),
