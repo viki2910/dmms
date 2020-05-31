@@ -5,7 +5,7 @@ class Paper{
   final int TotalMarks;
   final int totalattempt;
   final String examdate;
-  final String examtime;
+  final tmp examtime;
   final String examdatetime;
   final int packageid;
   final String papertitle;
@@ -25,9 +25,39 @@ class Paper{
       duration: json['duration'],
       totalattempt: json['totalattempt'],
       examdate: json['examdate'],
-      examtime: json['examtime'],
+      examtime: tmp.fromJson(json['examtime']),
       examdatetime: json['examdatetime'],
       packageid: json['packageid']
+    );
+  }
+}
+class tmp
+{
+  final int Ticks;
+  final int Days;
+  final int Hours;
+  final int MilliSeconds;
+  final int Minutes;
+  final int Seconds;
+  final int TotalDays;
+  final int TotalHours;
+  final int TotalMilliSeconds;
+  final int TotalMinutes;
+  final int TotalSeconds;
+  tmp({this.Ticks,this.Days,this.Hours,this.MilliSeconds,this.Minutes,this.Seconds,this.TotalDays,this.TotalHours,this.TotalMilliSeconds,this.TotalMinutes,this.TotalSeconds});
+  factory tmp.fromJson(Map<String, dynamic> json) {
+    return tmp(
+      Ticks: json['Ticks'],
+      Days: json['Days'],
+      Hours: json['Hours'],
+      MilliSeconds: json['MilliSeconds'],
+      Minutes: json['Minutes'],
+      Seconds: json['Seconds'],
+      TotalDays: json['TotalDays'],
+      TotalHours: json['TotalHours'],
+      TotalMilliSeconds: json['TotalMilliSeconds'],
+      TotalMinutes: json['TotalMinutes'],
+      TotalSeconds: json['TotalSeconds']
     );
   }
 }

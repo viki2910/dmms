@@ -5,15 +5,16 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class ListOfMyPaperAPI extends StatelessWidget
 {
-  ListOfMyPaperAPI();
+  final String MemberID;
+  ListOfMyPaperAPI({this.MemberID});
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Paper>>(
-      future: fetchList(http.Client()),
+      future: fetchList(http.Client(),MemberID),
       builder: (context, snapshot) {
         if (snapshot.hasError) print(snapshot.error);
 
@@ -26,13 +27,13 @@ class ListOfMyPaperAPI extends StatelessWidget
 
 }
 
-Future<List<Paper>> fetchList(http.Client client) async {
-
+Future<List<Paper>> fetchList(http.Client client,String MemberID) async {
+  print(MemberID);
   final http.Response response =
   await http.post('https://www.dmmsmedicalandnursingacademy.com/api/android_service.aspx', headers: <String, String>{
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
   },body:<String,String>{
-    "Request":'{"MethodName":"mypaper","memberid":"RJ19617725"}'
+    "Request":'{"MethodName":"mypaper","memberid":"${MemberID}"}'
   });
 
   // Use the compute function to run parsePapers in a separate isolate.
@@ -42,11 +43,7 @@ Future<List<Paper>> fetchList(http.Client client) async {
   return compute(parsePapers,response.body);
 }
 
-getmemberID() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String MemberID = prefs.getString("MemberID");
-  return MemberID;
-}
+
 
 List<Paper> parsePapers(String responseBody) {
   var tmp = json.decode(responseBody);
