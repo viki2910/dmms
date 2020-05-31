@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:dmms/CustomWidgets/Toast.dart';
 import 'package:dmms/CustomWidgets/edit_text_style.dart';
+import 'package:dmms/Screens/Login.dart';
 import 'package:dmms/Screens/OtpVerification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -182,7 +183,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           showToast("Registration Successful", Colors.green[500]);
           print("success");
           Navigator.push(context, MaterialPageRoute(
-                              builder: (_)=>OtpScreen(mobile:mobile.text,otp: rNum.toString(),result: result)
+//                              builder: (_)=>OtpScreen(mobile:mobile.text,otp: rNum.toString(),result: result)
+                                builder: (_)=>LoginScreen()
                           ));
         }
         else{

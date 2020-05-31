@@ -28,20 +28,24 @@ class ListOfMyPaperAPI extends StatelessWidget
 
 Future<List<Paper>> fetchList(http.Client client) async {
   String MemberID;
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  MemberID = prefs.getString("MemberID");
-  final http.Response response =
-  await http.post('https://www.dmmsmedicalandnursingacademy.com/api/android_service.aspx', headers: <String, String>{
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-  },body:<String,String>{
-    "Request":'{"MethodName":"mypaper","memberid":"${MemberID}"}'
+  SharedPreferences.getInstance().then((value) async {
+    MemberID = value.getString("MemberID");
+    final http.Response response =
+        await http.post('https://www.dmmsmedicalandnursingacademy.com/api/android_service.aspx', headers: <String, String>{
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    },body:<String,String>{
+      "Request":'{"MethodName":"mypaper","memberid":"${MemberID}"}'
+    });
+    return compute(parsePapers,response.body);
   });
+//  SharedPreferences prefs = await SharedPreferences.getInstance();
+
   // Use the compute function to run parsePapers in a separate isolate.
 
 //print(json.decode(response.body));
   
   
-  return compute(parsePapers,response.body);
+
 }
 List<Paper> parsePapers(String responseBody) {
   var tmp = json.decode(responseBody);
