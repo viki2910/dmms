@@ -5,8 +5,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:dmms/Models/ExamID.dart';
+import 'package:dmms/Screens/ExamPage.dart';
 class ListOfMyPaperAPI extends StatelessWidget
 {
   final String MemberID;
@@ -19,14 +19,34 @@ class ListOfMyPaperAPI extends StatelessWidget
         if (snapshot.hasError) print(snapshot.error);
 
         return snapshot.hasData
-            ? list(paper: snapshot.data)
+            ? list(paper: snapshot.data,MemberID : MemberID)
             : Center(child: CircularProgressIndicator());
       },
     );
   }
 
 }
+Future<List<ExamID>> fetchExamID(http.Client client,String MemberID,String PackageID,String PaperID) async {
+ // print(MemberID);
+  final http.Response response =
+  await http.post('https://www.dmmsmedicalandnursingacademy.com/api/android_service.aspx', headers: <String, String>{
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  },body:<String,String>{
+    "Request":'{"MethodName":"startexam","memberid":"${MemberID}","paperid":"${PaperID}","packageid":"${PackageID}"}'
+  });
 
+  // Use the compute function to run parsePapers in a separate isolate.
+
+//print(json.decode(response.body));
+  return compute(parseExamID,response.body);
+}
+List<ExamID> parseExamID(String responseBody) {
+  var tmp = json.decode(responseBody);
+  var tmp1 = tmp["data"] as List;
+  //final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+
+  return tmp1.map<ExamID>((json) => ExamID.fromJson(json)).toList();
+}
 Future<List<Paper>> fetchList(http.Client client,String MemberID) async {
   print(MemberID);
   final http.Response response =
@@ -58,8 +78,8 @@ class list extends StatelessWidget {
 
   final List<Paper> paper;
   BuildContext context;
-
-  list({this.paper});
+  String MemberID;
+  list({this.paper,this.MemberID});
 
   @override
   Widget build(BuildContext context) {
@@ -168,11 +188,35 @@ class list extends StatelessWidget {
                   fontSize: 13
               ),
             ),
-            onPressed: (){},
+            onPressed: () async {
+
+              List<ExamID> examid = await fetchExamID(http.Client(),MemberID,paper.packageid.toString(),paper.pid.toString());
+              enterExam(examid, MemberID, paper.pid.toString());
+
+
+              //              FutureBuilder<List<ExamID>>(
+//                future: fetchExamID(http.Client(),MemberID,paper.packageid.toString(),paper.pid.toString()),
+//                builder: (context, snapshot) {
+//                  print("in");
+//                  if (snapshot.hasError) print(snapshot.error);
+//
+//                  return snapshot.hasData
+//                      ? enterExam(snapshot.data,MemberID,paper.pid.toString())
+//                      : Center(child: CircularProgressIndicator());
+//                },
+//              );
+            },
           )
         ],
       ),
     );
+  }
+  Widget enterExam(List<ExamID> examid,String MemberID,String PaperID)
+  {
+
+    Navigator.push(context, MaterialPageRoute(
+        builder: (_)=>ExamPage(ExamID:examid[0].examid.toString(),MemberID:MemberID,PaperID: PaperID)
+    ));
   }
 
 
