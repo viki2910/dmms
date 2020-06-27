@@ -215,7 +215,7 @@ class list extends StatelessWidget {
   {
 
     Navigator.push(context, MaterialPageRoute(
-        builder: (_)=>ExamPage(ExamID:examid[0].examid.toString(),MemberID:MemberID,PaperID: PaperID)
+        builder: (_)=>ExamPage2(ExamID:examid[0].examid.toString(),MemberID:MemberID,PaperID: PaperID)
     ));
   }
 
