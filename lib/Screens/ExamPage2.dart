@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:temp/Models/Exam.dart';
-import 'package:temp/Models/RemainingTime.dart';
+import 'package:dmms/Models/Exam.dart';
+import 'package:dmms/Models/RemainingTime.dart';
 
 class ExamPage2 extends StatefulWidget {
   final String ExamID, MemberID, PaperID;
