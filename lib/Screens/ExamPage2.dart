@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -18,6 +19,12 @@ class ExamPage2 extends StatefulWidget {
 }
 
 class _ExamPage2State extends State<ExamPage2> {
+  int q=0;
+  var isAnswered=[];
+  var answers=[];
+  var isVisited=[];
+  int _radioValue=-1;
+  HashMap ans=new HashMap<int,int>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,8 +115,12 @@ class _ExamPage2State extends State<ExamPage2> {
                   widget.MemberID),
               builder: (context, snapshot) {
                 if (snapshot.hasError) print(snapshot.error);
-                if(snapshot.hasData)
-                return Padding(
+                if(snapshot.hasData) {
+                  List<Exam> questions = snapshot.data;
+
+                  if(!isVisited.contains(q))
+                      isVisited.add(q);
+                  return Padding(
                   padding:
                       EdgeInsets.only(top: 22, bottom: 16, left: 16, right: 16),
                   child: Column(
@@ -132,7 +143,7 @@ class _ExamPage2State extends State<ExamPage2> {
                               padding: EdgeInsets.only(
                                   top: 20, bottom: 12, left: 16, right: 16),
                               child: Text(
-                                '1. ' + snapshot.data[0].QUESTION,
+                                (q+1).toString()+'. ' + questions[q].QUESTION,
                                 style: TextStyle(
                                   color: Colors.grey[750],
                                   fontSize: 17,
@@ -154,9 +165,9 @@ class _ExamPage2State extends State<ExamPage2> {
                                   SizedBox(
                                       height: 16,
                                       child: Radio(
-                                          value: false,
-                                          groupValue: null,
-                                          onChanged: null)),
+                                          value: 0,
+                                          groupValue: _radioValue,
+                                          onChanged: _radioChange)),
                                   Text(
                                     'A ',
                                     style: TextStyle(
@@ -167,7 +178,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      snapshot.data[0].ANSWERA,
+                                      questions[q].ANSWERA,
                                       style: TextStyle(fontSize: 17),
                                       overflow: TextOverflow.clip,
                                     ),
@@ -184,9 +195,9 @@ class _ExamPage2State extends State<ExamPage2> {
                                   SizedBox(
                                       height: 16,
                                       child: Radio(
-                                          value: false,
-                                          groupValue: null,
-                                          onChanged: null)),
+                                          value: 1,
+                                          groupValue: _radioValue,
+                                          onChanged: _radioChange)),
                                   Text(
                                     'B ',
                                     style: TextStyle(
@@ -197,7 +208,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      snapshot.data[0].ANSWERB,
+                                      questions[q].ANSWERB,
                                       style: TextStyle(fontSize: 17),
                                       overflow: TextOverflow.clip,
                                     ),
@@ -214,9 +225,9 @@ class _ExamPage2State extends State<ExamPage2> {
                                   SizedBox(
                                       height: 16,
                                       child: Radio(
-                                          value: false,
-                                          groupValue: null,
-                                          onChanged: null)),
+                                          value: 2,
+                                          groupValue: _radioValue,
+                                          onChanged: _radioChange)),
                                   Text(
                                     'C ',
                                     style: TextStyle(
@@ -227,7 +238,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      snapshot.data[0].ANSWERC,
+                                      questions[q].ANSWERC,
                                       style: TextStyle(fontSize: 17),
                                       overflow: TextOverflow.clip,
                                     ),
@@ -244,9 +255,9 @@ class _ExamPage2State extends State<ExamPage2> {
                                   SizedBox(
                                       height: 16,
                                       child: Radio(
-                                          value: false,
-                                          groupValue: null,
-                                          onChanged: null)),
+                                          value:3,
+                                          groupValue: _radioValue,
+                                          onChanged: _radioChange)),
                                   Text(
                                     'D ',
                                     style: TextStyle(
@@ -257,7 +268,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      snapshot.data[0].ANSWERD,
+                                      questions[q].ANSWERD,
                                       style: TextStyle(fontSize: 17),
                                       overflow: TextOverflow.clip,
                                     ),
@@ -274,9 +285,9 @@ class _ExamPage2State extends State<ExamPage2> {
                                   SizedBox(
                                       height: 16,
                                       child: Radio(
-                                          value: false,
-                                          groupValue: null,
-                                          onChanged: null)),
+                                          value: 4,
+                                          groupValue: _radioValue,
+                                          onChanged: _radioChange)),
                                   Text(
                                     'E ',
                                     style: TextStyle(
@@ -287,7 +298,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      snapshot.data[0].ANSWERE,
+                                      questions[q].ANSWERE,
                                       style: TextStyle(fontSize: 17),
                                       overflow: TextOverflow.clip,
                                     ),
@@ -313,6 +324,20 @@ class _ExamPage2State extends State<ExamPage2> {
                                       color: Colors.white,
                                       iconSize: 18,
                                       onPressed: (){
+                                        setState(() {
+
+                                          if(q!=0)
+                                            q=q-1;
+
+                                          if(ans.containsKey(q))
+                                          {
+                                            _radioValue=ans[q];
+                                          }
+                                          else
+                                          {
+                                            _radioValue=-1;
+                                          }
+                                        });
                                       },
                                     ),
                                   ),
@@ -332,6 +357,10 @@ class _ExamPage2State extends State<ExamPage2> {
                                         textAlign: TextAlign.center,
                                       ),
                                       onPressed: (){
+                                        setState(() {
+                                          ans.remove(q);
+                                          _radioValue=-1;
+                                        });
                                       },
                                     ),
                                   ),
@@ -347,6 +376,19 @@ class _ExamPage2State extends State<ExamPage2> {
                                       color: Colors.white,
                                       iconSize: 18,
                                       onPressed: (){
+                                        setState(() {
+
+                                          if(!(questions.length==q+1))
+                                              q=q+1;
+                                          if(ans.containsKey(q))
+                                          {
+                                            _radioValue=ans[q];
+                                          }
+                                          else
+                                          {
+                                            _radioValue=-1;
+                                          }
+                                        });
                                       },
                                     ),
                                   ),
@@ -407,15 +449,26 @@ class _ExamPage2State extends State<ExamPage2> {
                         children:List.generate(snapshot.data.length, (index) {
                           return GestureDetector(
                             onTap: (){
-                              print('something');
                               //do jump to question no
+                              setState(() {
+
+                                q=index;
+                                if(ans.containsKey(q))
+                                {
+                                  _radioValue=ans[q];
+                                }
+                                else
+                                {
+                                  _radioValue=-1;
+                                }
+                              });
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(2.0),
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4),
-                                  color: Colors.blue[500],
+                                  color: (q==index)?Colors.blue[800]:Colors.blue[500],
                                 ),
                                 child: Center(
                                   child: Text('${index+1}',
@@ -446,7 +499,7 @@ class _ExamPage2State extends State<ExamPage2> {
                               color: Colors.blue[500],
                             ),
                             child: Center(
-                              child: Text('0',
+                              child: Text((questions.length-isVisited.length).toString(),
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18
@@ -472,7 +525,7 @@ class _ExamPage2State extends State<ExamPage2> {
                               color: Colors.green,
                             ),
                             child: Center(
-                              child: Text('0',
+                              child: Text(ans.length.toString(),
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18
@@ -504,7 +557,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                 color: Colors.red,
                               ),
                               child: Center(
-                                child: Text('0',
+                                child: Text((questions.length-ans.length).toString(),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18
@@ -527,7 +580,7 @@ class _ExamPage2State extends State<ExamPage2> {
                     ],
                   ),
                 );
-                else
+                } else
                   return Padding(
                     padding: EdgeInsets.only(top: 120),
                     child: Container(child: Center(child: CircularProgressIndicator())),
@@ -540,7 +593,46 @@ class _ExamPage2State extends State<ExamPage2> {
       ),
     );
   }
+
+  void _radioChange(int value)
+  {
+    setState(() {
+      _radioValue=value;
+      switch(value){
+        case 0:
+          if(ans.containsKey(q))
+            ans.update(q, (value) => 0);
+          else
+            ans.putIfAbsent(q, () => 0);
+          break;
+        case 1:
+          if(ans.containsKey(q))
+            ans.update(q, (value) => 1);
+          else
+            ans.putIfAbsent(q, () => 1);
+          break;
+        case 2:
+          if(ans.containsKey(q))
+            ans.update(q, (value) => 2);
+          else
+            ans.putIfAbsent(q, () => 2);
+          break;
+        case 3:
+          if(ans.containsKey(q))
+            ans.update(q, (value) => 3);
+          else
+            ans.putIfAbsent(q, () => 3);
+          break;
+        case 4:
+          if(ans.containsKey(q))
+            ans.update(q, (value) => 4);
+          else
+            ans.putIfAbsent(q, () => 4);
+      }
+    });
+  }
 }
+
 
 Future<List<RemainingTime>> fetchRemaingTime(
     http.Client client, String ExamID, String MemberID) async {
