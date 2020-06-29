@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -468,7 +469,7 @@ class _ExamPage2State extends State<ExamPage2> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4),
-                                  color: (q==index)?Colors.blue[800]:Colors.blue[500],
+                                  color: (q==index)?Colors.blue[800]:decideColour(index)[500],
                                 ),
                                 child: Center(
                                   child: Text('${index+1}',
@@ -630,6 +631,24 @@ class _ExamPage2State extends State<ExamPage2> {
             ans.putIfAbsent(q, () => 4);
       }
     });
+  }
+  MaterialColor decideColour(int value)
+  {
+    if(isVisited.contains(value))
+      {
+        if(ans.containsKey(value))
+          {
+            return Colors.green;
+          }
+        else
+          {
+            return Colors.red;
+          }
+      }
+    else
+      {
+        return Colors.blue;
+      }
   }
 }
 
