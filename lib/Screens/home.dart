@@ -321,46 +321,46 @@ class _HomeState extends State<Home> {
 }
 */
 
+import 'dart:async';
+import 'dart:convert';
 import 'dart:ui';
+
 import 'package:dmms/CustomWidgets/NavigationDrawer.dart';
+import 'package:dmms/CustomWidgets/Toast.dart';
 import 'package:dmms/CustomWidgets/appbar.dart';
 import 'package:dmms/CustomWidgets/heading_text_style.dart';
 import 'package:dmms/CustomWidgets/image_slider.dart';
+import 'package:dmms/Models/Board.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
 import 'package:dmms/data/data.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dmms/CustomWidgets/Toast.dart';
-import 'package:dmms/Models/Board.dart';
 import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
+
 Future<List<Board>> fetchList(http.Client client) async {
-  final http.Response response =
-  await http.post('http://nursingtestseries.com/api/android_service.aspx', headers: <String, String>{
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-  },body:<String,String>{
-    "Request":'{"MethodName":"board","action":"apphome"}'
-  });
+  final http.Response response = await http.post(
+      'http://nursingtestseries.com/api/android_service.aspx',
+      headers: <String, String>{
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      body: <String, String>{
+        "Request": '{"MethodName":"board","action":"apphome"}'
+      });
 
   // Use the compute function to run parsePapers in a separate isolate.
 
 //print(json.decode(response.body));
 
-  return compute(parseboard,response.body);
+  return compute(parseboard, response.body);
 }
-
-
 
 List<Board> parseboard(String responseBody) {
   var tmp = json.decode(responseBody);
@@ -369,49 +369,50 @@ List<Board> parseboard(String responseBody) {
 
   return tmp1.map<Board>((json) => Board.fromJson(json)).toList();
 }
+
 class _HomeState extends State<Home> {
   int _index = 0;
 
   Future<bool> _onWillPop() async {
     Future.value(false);
     return (await showDialog(
-      context: context,
-      builder: (context) => new AlertDialog(
-        title: new Text('Exit App?'),
-        content: new Text('Do you want to exit from the app ?'),
-        actions: <Widget>[
-          new FlatButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: new Text(
-              'No',
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: 'nunito_bold',
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Exit App?'),
+            content: new Text('Do you want to exit from the app ?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text(
+                  'No',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'nunito_bold',
+                  ),
+                ),
               ),
-            ),
-          ),
-          new FlatButton(
-            //onPressed: () => Navigator.of(context).pop(true),
-            onPressed: () {
-              SystemNavigator.pop();
-            },
-            child: new Text(
-              'Yes',
-              style: TextStyle(
-                  fontSize: 16,
-                fontFamily: 'nunito_bold',
+              new FlatButton(
+                //onPressed: () => Navigator.of(context).pop(true),
+                onPressed: () {
+                  SystemNavigator.pop();
+                },
+                child: new Text(
+                  'Yes',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'nunito_bold',
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
-    )) ??
+        )) ??
         false;
   }
 
   Future<String> name = Future<String>.delayed(
     Duration(seconds: 0),
-        () async {
+    () async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (prefs.getString("MemberID") != "" &&
           prefs.getString("MemberID") != null) {
@@ -420,6 +421,7 @@ class _HomeState extends State<Home> {
       return "";
     },
   );
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -440,7 +442,8 @@ class _HomeState extends State<Home> {
     return new WillPopScope(
       onWillPop: () => _onWillPop(),
       child: Scaffold(
-        backgroundColor: Colors.grey[80],//Colors.grey[100],
+        backgroundColor: Colors.grey[80],
+        //Colors.grey[100],
         appBar: setAppbar("DMMS Nursing Academy"),
         drawer: NavDrawer(),
         body: ListView(
@@ -448,7 +451,7 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             SizedBox(height: 15),
             Padding(
-              padding: EdgeInsets.only(left:20),
+              padding: EdgeInsets.only(left: 20),
               child: Text(
                 'Featured Test Series',
                 style: headingTextStyle2,
@@ -468,32 +471,243 @@ class _HomeState extends State<Home> {
             SizedBox(height: 15),
             //ad banner
             ImageSlider(110, 20, imageList),
+            SizedBox(height: 15),
+            Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                'Featured Courses',
+                style: headingTextStyle2,
+              ),
+            ),
+            SizedBox(height: 12),
+            //featured courses
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Container(
+                margin: EdgeInsets.only(left: 16, right: 16),
+                height: 335,
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount:6,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                     width: 220,
+                    margin: EdgeInsets.symmetric(horizontal: 4,vertical: 0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 1,
+                          color: Colors.black26,
+                        ),
+                      ]
+                      //border: Border.all(color: Colors.grey[100]),
+                    ),
+                    child:Column(
+                      children: <Widget>[
+                        ClipRRect(
+                          child: Image(
+                            image: AssetImage(
+                              'assets/i2.jpg',
+                            ),
+                            height: 120,
+                            width: 220,
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                        ),
+                        SizedBox(height: 10),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                              'JIPMER Staff Nurse Exam-2021 Premium Test Paper',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'nunito_bold',
+                                fontSize: 14
+                              ),
+                              overflow: TextOverflow.clip,
+                          ),
 
+                        ),
+                        SizedBox(height: 6),
+                        Padding(
+                          padding:EdgeInsets.symmetric(horizontal: 10),
+                          child: Divider(height: 0.7,color: Colors.grey[400],),
+                        ),
+                        SizedBox(height: 6),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            'Total Test Paper-2',
+                            style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 14
+                            ),
+                            overflow: TextOverflow.clip,
+                          ),
 
+                        ),
+                        SizedBox(height: 6),
+                        Padding(
+                          padding:EdgeInsets.symmetric(horizontal: 10),
+                          child: Divider(height: 0.7,color: Colors.grey[400],),
+                        ),
+                        SizedBox(height: 6),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            'Full test based on exam pattern',
+                            style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 14
+                            ),
+                            overflow: TextOverflow.clip,
+                          ),
+
+                        ),
+                        SizedBox(height: 6),
+                        Padding(
+                          padding:EdgeInsets.symmetric(horizontal: 10),
+                          child: Divider(height: 0.7,color: Colors.grey[400],),
+                        ),
+                        SizedBox(height: 6),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            'Paper By Expert Faculty',
+                            style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 14
+                            ),
+                            overflow: TextOverflow.clip,
+                          ),
+
+                        ),
+                        SizedBox(height: 6),
+                        Padding(
+                          padding:EdgeInsets.symmetric(horizontal: 10),
+                          child: Divider(height: 0.7,color: Colors.grey[400],),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FlatButton(
+                                onPressed:(){},
+                                color:Colors.red,
+                                child: Text(
+                                    'Join Now',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FlatButton(
+                                onPressed:(){},
+                                color:Colors.red,
+                                child: Text(
+                                  'Help',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+
+                      ],
+                    ),);
+                  },
+                ),
+              ),
+            ),
+
+            SizedBox(height: 20),
 
           ],
         ),
-        bottomNavigationBar:BubbleBottomBar(
-          opacity: 0.2,
-          backgroundColor: Colors.white,
+        bottomNavigationBar: BottomNavigationBar(
           currentIndex: _index,
-          hasInk: true,
-          hasNotch: true,
-          inkColor: Colors.black12,
+          backgroundColor: Colors.white,
+          selectedItemColor: Colors.red,
+          unselectedItemColor: Colors.grey[800],
+          showUnselectedLabels: true,
           elevation: 12,
-          items: <BubbleBottomBarItem>[
-            BubbleBottomBarItem(backgroundColor: Colors.red, icon: Icon(Icons.home, color: Colors.grey[800],), activeIcon: Icon(Icons.home, color: Colors.red,), title: Text("Home")),
-            BubbleBottomBarItem(backgroundColor: Colors.blue, icon: Icon(Icons.view_list, color: Colors.grey[800],), activeIcon: Icon(Icons.view_list, color: Colors.blue,), title: Text("My Papers")),
-            BubbleBottomBarItem(backgroundColor: Colors.indigo, icon: Icon(Icons.pageview, color:  Colors.grey[800],), activeIcon: Icon(Icons.pageview, color: Colors.indigo,), title: Text("Solutions")),
-            BubbleBottomBarItem(backgroundColor: Colors.pink, icon: Icon(Icons.add_to_queue, color:  Colors.grey[800],), activeIcon: Icon(Icons.add_to_queue, color: Colors.pink,), title: Text("Join Series")),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.grey[800],
+                ),
+                activeIcon: Icon(
+                  Icons.home,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'Home',
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.center,
+                )),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.view_list,
+                  color: Colors.grey[800],
+                ),
+                activeIcon: Icon(
+                  Icons.view_list,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'My Papers',
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.center,
+                )),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.pageview,
+                  color: Colors.grey[800],
+                ),
+                activeIcon: Icon(
+                  Icons.pageview,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'Solutions',
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.center,
+                )),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.add_to_queue,
+                  color: Colors.grey[800],
+                ),
+                activeIcon: Icon(
+                  Icons.add_to_queue,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'Join Series',
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.center,
+                )),
+            //  BottomNavigationBarItem(icon: Icon(Icons.notifications,color:Colors.grey[800],),activeIcon: Icon(Icons.notifications,color:Colors.red,),title: Text('Notifications',overflow: TextOverflow.clip,)),
           ],
-          onTap: (int index){
+          onTap: (int index) {
             setState(() {
-              _index=index;
+              _index = index;
             });
           },
         ),
-
       ),
     );
   }
@@ -562,7 +776,7 @@ class _HomeState extends State<Home> {
                         );
                     },
                     splashColor:
-                    Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
+                        Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
                     highlightColor: Colors.transparent,
                   ),
                 ),
@@ -573,7 +787,6 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
 
   //image quiz item
   Widget buildImageQuizItem(int index) {
@@ -629,18 +842,18 @@ class _HomeState extends State<Home> {
   }
 }
 
-//featured sries container
+//featured series  container
 class Boardlist extends StatelessWidget {
-
   final List<Board> board;
   BuildContext context;
+
   Boardlist({this.board});
 
   @override
   Widget build(BuildContext context) {
     this.context = context;
     return Container(
-      margin: EdgeInsets.only(left: 16,right: 16),
+      margin: EdgeInsets.only(left: 16, right: 16),
       height: 120,
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
@@ -653,25 +866,20 @@ class Boardlist extends StatelessWidget {
     );
   }
 
-
   //each testseries board item
   Widget buildBoardItem(Board board) {
     return Container(
-      margin: EdgeInsets.only(right: 4,left: 4),
+      margin: EdgeInsets.only(right: 4, left: 4),
       width: 90,
       decoration: BoxDecoration(
-        borderRadius:BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10),
         color: Colors.white,
         border: Border.all(color: Colors.grey[100]),
       ),
       child: Container(
         margin: EdgeInsets.all(4),
-        child: Image.network("http://nursingtestseries.com/"+board.image),
+        child: Image.network("http://nursingtestseries.com/" + board.image),
       ),
     );
   }
-
-
-
-
 }
