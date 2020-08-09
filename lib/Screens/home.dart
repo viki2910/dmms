@@ -333,12 +333,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dmms/CustomWidgets/Toast.dart';
-
+import 'package:dmms/Models/Board.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/foundation.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
+Future<List<Board>> fetchList(http.Client client) async {
+  final http.Response response =
+  await http.post('http://nursingtestseries.com/api/android_service.aspx', headers: <String, String>{
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  },body:<String,String>{
+    "Request":'{"MethodName":"board","action":"apphome"}'
+  });
 
+  // Use the compute function to run parsePapers in a separate isolate.
+
+//print(json.decode(response.body));
+
+  return compute(parseboard,response.body);
+}
+
+
+
+List<Board> parseboard(String responseBody) {
+  var tmp = json.decode(responseBody);
+  var tmp1 = tmp["data"] as List;
+  //final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+
+  return tmp1.map<Board>((json) => Board.fromJson(json)).toList();
+}
 class _HomeState extends State<Home> {
   int _index = 0;
   Future<bool> _onWillPop() async {
@@ -444,35 +471,17 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(height: 15),
-            Container(
-              margin: EdgeInsets.only(left: 20,right: 12),
-              height: 140,
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: EdgeInsets.only(right: 8,top: 0,bottom: 0),
-                    width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius:BorderRadius.circular(10),
-                      color: Colors.white,
-                      border: Border.all(color: Colors.grey[100]),
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/i1.jpg'),
-                            //fit: BoxFit.cover,
-                          )
-                      ),
-                    ),
-                  );
-                },
-              ),
+            FutureBuilder<List<Board>>(
+              future: fetchList(http.Client()),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) print(snapshot.error);
+
+                return snapshot.hasData
+                    ? Boardlist(board: snapshot.data)
+                    : Center(child: CircularProgressIndicator());
+              },
             ),
+
 
             SizedBox(height: 15),
 
@@ -679,6 +688,7 @@ class _HomeState extends State<Home> {
     );
   }
 
+
   //image quiz item
   Widget buildImageQuizItem(int index) {
     return Container(
@@ -731,4 +741,46 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+}
+class Boardlist extends StatelessWidget {
+
+  final List<Board> board;
+  BuildContext context;
+  Boardlist({this.board});
+
+  @override
+  Widget build(BuildContext context) {
+    this.context = context;
+    return Container(
+      margin: EdgeInsets.only(left: 20,right: 12),
+      height: 140,
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: board.length,
+        itemBuilder: (BuildContext context, int index) {
+          return buildBoardItem(board[index]);
+        },
+      ),
+    );
+  }
+
+  //each Exam item
+  Widget buildBoardItem(Board board) {
+    return Container(
+      margin: EdgeInsets.only(right: 8,top: 0,bottom: 0),
+      width: 100,
+      decoration: BoxDecoration(
+        borderRadius:BorderRadius.circular(10),
+        color: Colors.white,
+        border: Border.all(color: Colors.grey[100]),
+      ),
+      child: Container(
+        margin: EdgeInsets.all(4),
+        child: Image.network("http://nursingtestseries.com/"+board.image),
+      ),
+    );
+  }
+
+
 }
