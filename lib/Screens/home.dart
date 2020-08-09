@@ -332,6 +332,7 @@ import 'package:dmms/CustomWidgets/heading_text_style.dart';
 import 'package:dmms/CustomWidgets/image_slider.dart';
 import 'package:dmms/Models/Board.dart';
 import 'package:dmms/Models/dashboard_cards.dart';
+import 'package:dmms/Screens/MyPapers.dart';
 import 'package:dmms/data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -339,7 +340,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:dmms/Models/Package.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -369,7 +370,20 @@ List<Board> parseboard(String responseBody) {
 
   return tmp1.map<Board>((json) => Board.fromJson(json)).toList();
 }
-
+Future<List<Package>> fetchListPackage(http.Client client) async {
+  final http.Response response =
+  await http.post('http://nursingtestseries.com/api/android_service.aspx', headers: <String, String>{
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  },body:<String,String>{
+    "Request":'{"MethodName":"packageall","action":"all"}'
+  });
+  return compute(parsePackage,response.body);
+}
+List<Package> parsePackage(String responseBody) {
+  var tmp = json.decode(responseBody);
+  var tmp1 = tmp["data"] as List;
+  return tmp1.map<Package>((json) => Package.fromJson(json)).toList();
+}
 class _HomeState extends State<Home> {
   int _index = 0;
 
@@ -433,6 +447,9 @@ class _HomeState extends State<Home> {
         showToast("Clicked Home", Colors.black);
         break;
       case 1:
+        Navigator.push(context, MaterialPageRoute(
+            builder: (_)=>MyPapers()
+        ));
         print("Index is $_index");
         break;
       case 2:
@@ -480,157 +497,18 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(height: 12),
-            //featured courses
-            Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Container(
-                margin: EdgeInsets.only(left: 16, right: 16),
-                height: 336,
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount:6,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                     width: 220,
-                    margin: EdgeInsets.symmetric(horizontal: 4,vertical: 0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 1,
-                          color: Colors.black26,
-                        ),
-                      ]
-                      //border: Border.all(color: Colors.grey[100]),
-                    ),
-                    child:Column(
-                      children: <Widget>[
-                        ClipRRect(
-                          child: Image(
-                            image: AssetImage(
-                              'assets/i2.jpg',
-                            ),
-                            height: 120,
-                            width: 220,
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                        ),
-                        SizedBox(height: 10),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                              'JIPMER Staff Nurse Exam-2021 Premium Test Paper',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'nunito_bold',
-                                fontSize: 14
-                              ),
-                              overflow: TextOverflow.clip,
-                          ),
+            FutureBuilder<List<Package>>(
+              future: fetchListPackage(http.Client()),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) print(snapshot.error);
 
-                        ),
-                        SizedBox(height: 6),
-                        Padding(
-                          padding:EdgeInsets.symmetric(horizontal: 10),
-                          child: Divider(height: 0.7,color: Colors.grey[400],),
-                        ),
-                        SizedBox(height: 6),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            'Total Test Paper-2',
-                            style: TextStyle(
-                                color: Colors.grey[800],
-                                fontSize: 14
-                            ),
-                            overflow: TextOverflow.clip,
-                          ),
-
-                        ),
-                        SizedBox(height: 6),
-                        Padding(
-                          padding:EdgeInsets.symmetric(horizontal: 10),
-                          child: Divider(height: 0.7,color: Colors.grey[400],),
-                        ),
-                        SizedBox(height: 6),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            'Full test based on exam pattern',
-                            style: TextStyle(
-                                color: Colors.grey[800],
-                                fontSize: 14
-                            ),
-                            overflow: TextOverflow.clip,
-                          ),
-
-                        ),
-                        SizedBox(height: 6),
-                        Padding(
-                          padding:EdgeInsets.symmetric(horizontal: 10),
-                          child: Divider(height: 0.7,color: Colors.grey[400],),
-                        ),
-                        SizedBox(height: 6),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            'Paper By Expert Faculty',
-                            style: TextStyle(
-                                color: Colors.grey[800],
-                                fontSize: 14
-                            ),
-                            overflow: TextOverflow.clip,
-                          ),
-
-                        ),
-                        SizedBox(height: 6),
-                        Padding(
-                          padding:EdgeInsets.symmetric(horizontal: 10),
-                          child: Divider(height: 0.7,color: Colors.grey[400],),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: FlatButton(
-                                onPressed:(){},
-                                color:Colors.red,
-                                child: Text(
-                                    'Join Now',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: FlatButton(
-                                onPressed:(){},
-                                color:Colors.red,
-                                child: Text(
-                                  'Help',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-
-                      ],
-                    ),);
-                  },
-                ),
-              ),
+                return snapshot.hasData
+                    ? Packagelist(package: snapshot.data)
+                    : Center(child: CircularProgressIndicator());
+              },
             ),
+            //featured courses
+            
 
             SizedBox(height: 20),
 
@@ -883,3 +761,167 @@ class Boardlist extends StatelessWidget {
     );
   }
 }
+class Packagelist extends StatelessWidget {
+  final List<Package> package;
+  BuildContext context;
+
+  Packagelist({this.package});
+
+  @override
+  Widget build(BuildContext context) {
+    this.context = context;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Container(
+        margin: EdgeInsets.only(left: 16, right: 16),
+        height: 336,
+        child: ListView.builder(
+          physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          itemCount:package.length,
+          itemBuilder: (BuildContext context, int index) {
+            return buildpackageItem(package[index]);
+          },
+        ),
+      ),
+    );
+  }
+
+  //each testseries package item
+  Widget buildpackageItem(Package package) {
+    return Container(
+      width: 220,
+      margin: EdgeInsets.symmetric(horizontal: 4,vertical: 0),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 1,
+              color: Colors.black26,
+            ),
+          ]
+        //border: Border.all(color: Colors.grey[100]),
+      ),
+      child:Column(
+        children: <Widget>[
+          ClipRRect(
+            child: Image.network("http://nursingtestseries.com/" + package.photopath,
+              height: 120,
+              width: 220,
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+          ),
+          SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              package.packagetitle,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'nunito_bold',
+                  fontSize: 14
+              ),
+              overflow: TextOverflow.clip,
+            ),
+
+          ),
+          SizedBox(height: 6),
+          Padding(
+            padding:EdgeInsets.symmetric(horizontal: 10),
+            child: Divider(height: 0.7,color: Colors.grey[400],),
+          ),
+          SizedBox(height: 6),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              "Total Papers: "+package.totalpaper.toString(),
+              style: TextStyle(
+                  color: Colors.grey[800],
+                  fontSize: 14
+              ),
+              overflow: TextOverflow.clip,
+            ),
+
+          ),
+          SizedBox(height: 6),
+          Padding(
+            padding:EdgeInsets.symmetric(horizontal: 10),
+            child: Divider(height: 0.7,color: Colors.grey[400],),
+          ),
+          SizedBox(height: 6),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              'Full test based on exam pattern',
+              style: TextStyle(
+                  color: Colors.grey[800],
+                  fontSize: 14
+              ),
+              overflow: TextOverflow.clip,
+            ),
+
+          ),
+          SizedBox(height: 6),
+          Padding(
+            padding:EdgeInsets.symmetric(horizontal: 10),
+            child: Divider(height: 0.7,color: Colors.grey[400],),
+          ),
+          SizedBox(height: 6),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              'Paper By Expert Faculty',
+              style: TextStyle(
+                  color: Colors.grey[800],
+                  fontSize: 14
+              ),
+              overflow: TextOverflow.clip,
+            ),
+
+          ),
+          SizedBox(height: 6),
+          Padding(
+            padding:EdgeInsets.symmetric(horizontal: 10),
+            child: Divider(height: 0.7,color: Colors.grey[400],),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FlatButton(
+                  onPressed:(){},
+                  color:Colors.red,
+                  child: Text(
+                    'Join Now',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FlatButton(
+                  onPressed:(){},
+                  color:Colors.red,
+                  child: Text(
+                    'Help',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+
+        ],
+      ),);
+  }
+}
+
