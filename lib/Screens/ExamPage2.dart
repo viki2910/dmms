@@ -26,6 +26,7 @@ class _ExamPage2State extends State<ExamPage2> {
   var isVisited=[];
   int _radioValue=-1;
   HashMap ans=new HashMap<int,int>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +41,7 @@ class _ExamPage2State extends State<ExamPage2> {
                 if (snapshot.hasError) print(snapshot.error);
                 if (snapshot.hasData) {
                   minutes = snapshot.data[0].remainingTime + 'm';
+                  print(minutes);
                   seconds = '00s';
                 } else {
                   minutes = '--';
@@ -164,7 +166,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   SizedBox(
-                                      height: 16,
+                                      height: 24,
                                       child: Radio(
                                           value: 0,
                                           groupValue: _radioValue,
@@ -194,7 +196,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   SizedBox(
-                                      height: 16,
+                                      height: 24,
                                       child: Radio(
                                           value: 1,
                                           groupValue: _radioValue,
@@ -224,7 +226,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   SizedBox(
-                                      height: 16,
+                                      height: 24,
                                       child: Radio(
                                           value: 2,
                                           groupValue: _radioValue,
@@ -254,7 +256,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   SizedBox(
-                                      height: 16,
+                                      height: 24,
                                       child: Radio(
                                           value:3,
                                           groupValue: _radioValue,
@@ -284,7 +286,7 @@ class _ExamPage2State extends State<ExamPage2> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   SizedBox(
-                                      height: 16,
+                                      height: 24,
                                       child: Radio(
                                           value: 4,
                                           groupValue: _radioValue,
@@ -313,7 +315,7 @@ class _ExamPage2State extends State<ExamPage2> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Container(
+                                    Container(
                                     height: 36,
                                     width: 36,
                                     decoration: BoxDecoration(
