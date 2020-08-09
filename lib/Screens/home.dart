@@ -443,34 +443,15 @@ class _HomeState extends State<Home> {
         body: ListView(
           shrinkWrap: true,
           children: <Widget>[
-            SizedBox(height: 20),
-            Center(
-              child: FutureBuilder<String>(
-                  future: name, // a previously-obtained Future<String> or null
-                  builder:
-                      (BuildContext context, AsyncSnapshot<String> snapshot) {
-                    if (snapshot.hasData) {
-                      return Text(
-                        'Welcome ${snapshot.data}',
-                        style: headingTextStyle,
-                      );
-                    }
-                    return Text(
-                      'Welcome ...',
-                      style: headingTextStyle,
-                    );
-                  }),
-            ),
-            SizedBox(height: 20),
-            //////////////////////////////////////////////////////////
+            SizedBox(height: 15),
             Padding(
               padding: EdgeInsets.only(left:20),
               child: Text(
                 'Featured Test Series',
-                 style: headingTextStyle2,
+                style: headingTextStyle2,
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 12),
             FutureBuilder<List<Board>>(
               future: fetchList(http.Client()),
               builder: (context, snapshot) {
@@ -481,111 +462,10 @@ class _HomeState extends State<Home> {
                     : Center(child: CircularProgressIndicator());
               },
             ),
-
-
             SizedBox(height: 15),
+            ImageSlider(110, 20, imageList),
 
-            //////////////////////////////////////
 
-            ImageSlider(100, 20, imageList),
-            SizedBox(height: 15),
-            Container(
-              margin: EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width,
-              child: GridView.count(
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                crossAxisCount: 3,
-                children: List.generate(cards.length, (index) {
-                  DashCard card = cards[index];
-                  return buildCardItem(card, 12);
-                }),
-              ),
-            ),
-            SizedBox(height: 20),
-            ImageSlider(140, 20, imageList),
-            SizedBox(height: 30),
-            Center(
-              child: Text(
-                'IMAGE BASED QUIZ',
-                style: headingTextStyle,
-              ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: imageQuiz.length + 1,
-                physics: ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  if (index < imageQuiz.length)
-                    return buildImageQuizItem(index);
-                  else
-                    return Container(
-                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Text(
-                            'See More',
-                            style:
-                            TextStyle(fontSize: 14, color: Colors.black87),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.grey[800],
-                            size: 15,
-                          )
-                        ],
-                      ),
-                    );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    height: 1,
-                    color: Colors.grey[400],
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 20),
-            ImageSlider(100, 20, imageList),
-            SizedBox(height: 30),
-            Center(
-              child: Text(
-                'VIDEO BASED QUIZ',
-                style: headingTextStyle,
-              ),
-            ),
-            SizedBox(height: 5),
-            Container(
-              child: GridView.count(
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                padding: EdgeInsets.all(10),
-                crossAxisCount: 3,
-                children: List.generate(videoQuiz.length, (index) {
-                  DashCard videoQuizCard = videoQuiz[index];
-                  return buildCardItem(videoQuizCard, 9);
-                }),
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              color: Colors.red,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(
-                  '2020 DMMS, All rights reserved',
-                  style: TextStyle(
-                    fontFamily: 'nunito_bold',
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            )
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -742,6 +622,8 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+//featured sries container
 class Boardlist extends StatelessWidget {
 
   final List<Board> board;
@@ -752,8 +634,8 @@ class Boardlist extends StatelessWidget {
   Widget build(BuildContext context) {
     this.context = context;
     return Container(
-      margin: EdgeInsets.only(left: 20,right: 12),
-      height: 140,
+      margin: EdgeInsets.only(left: 16,right: 16),
+      height: 120,
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -765,11 +647,12 @@ class Boardlist extends StatelessWidget {
     );
   }
 
-  //each Exam item
+
+  //each testseries board item
   Widget buildBoardItem(Board board) {
     return Container(
-      margin: EdgeInsets.only(right: 8,top: 0,bottom: 0),
-      width: 100,
+      margin: EdgeInsets.only(right: 4,left: 4),
+      width: 90,
       decoration: BoxDecoration(
         borderRadius:BorderRadius.circular(10),
         color: Colors.white,
@@ -781,6 +664,8 @@ class Boardlist extends StatelessWidget {
       ),
     );
   }
+
+
 
 
 }

@@ -20,7 +20,7 @@ class _ImageSliderState extends State<ImageSlider> {
       child: Center(
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
           ),
           height: widget.height,
           child: Carousel(
