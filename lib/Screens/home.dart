@@ -338,6 +338,9 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -368,6 +371,7 @@ List<Board> parseboard(String responseBody) {
 }
 class _HomeState extends State<Home> {
   int _index = 0;
+
   Future<bool> _onWillPop() async {
     Future.value(false);
     return (await showDialog(
@@ -431,7 +435,6 @@ class _HomeState extends State<Home> {
         break;
       case 2:
         print("Index is $_index");
-
         break;
     }
     return new WillPopScope(
@@ -461,33 +464,36 @@ class _HomeState extends State<Home> {
                     ? Boardlist(board: snapshot.data)
                     : Center(child: CircularProgressIndicator());
               },
-            ),
+            ), //featured test series
             SizedBox(height: 15),
+            //ad banner
             ImageSlider(110, 20, imageList),
 
 
+
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar:BubbleBottomBar(
+          opacity: 0.2,
+          backgroundColor: Colors.white,
           currentIndex: _index,
-          onTap: (int index) => setState(() => _index = index),
-          iconSize: 30,
-          backgroundColor: Colors.red,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.white,
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              title: new Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.person),
-              title: new Text('Profile'),
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.power_settings_new), title: Text('Logout'))
+          hasInk: true,
+          hasNotch: true,
+          inkColor: Colors.black12,
+          elevation: 12,
+          items: <BubbleBottomBarItem>[
+            BubbleBottomBarItem(backgroundColor: Colors.red, icon: Icon(Icons.home, color: Colors.grey[800],), activeIcon: Icon(Icons.home, color: Colors.red,), title: Text("Home")),
+            BubbleBottomBarItem(backgroundColor: Colors.blue, icon: Icon(Icons.view_list, color: Colors.grey[800],), activeIcon: Icon(Icons.view_list, color: Colors.blue,), title: Text("My Papers")),
+            BubbleBottomBarItem(backgroundColor: Colors.indigo, icon: Icon(Icons.pageview, color:  Colors.grey[800],), activeIcon: Icon(Icons.pageview, color: Colors.indigo,), title: Text("Solutions")),
+            BubbleBottomBarItem(backgroundColor: Colors.pink, icon: Icon(Icons.add_to_queue, color:  Colors.grey[800],), activeIcon: Icon(Icons.add_to_queue, color: Colors.pink,), title: Text("Join Series")),
           ],
+          onTap: (int index){
+            setState(() {
+              _index=index;
+            });
+          },
         ),
+
       ),
     );
   }
