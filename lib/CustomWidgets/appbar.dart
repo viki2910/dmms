@@ -18,7 +18,7 @@ dynamic setAppbar(String title) {
             },
           );
         } ),
-    backgroundColor: Color.fromRGBO(49, 139, 176, 1),
+    backgroundColor:Colors.red,
     title: Text(
       title,
       style: TextStyle(

@@ -390,43 +390,43 @@ class _HomeState extends State<Home> {
   Future<bool> _onWillPop() async {
     Future.value(false);
     return (await showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text('Exit App?'),
-            content: new Text('Do you want to exit from the app ?'),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text(
-                  'No',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'nunito_bold',
-                  ),
-                ),
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Exit App?'),
+        content: new Text('Do you want to exit from the app ?'),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: new Text(
+              'No',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'nunito_bold',
               ),
-              new FlatButton(
-                //onPressed: () => Navigator.of(context).pop(true),
-                onPressed: () {
-                  SystemNavigator.pop();
-                },
-                child: new Text(
-                  'Yes',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'nunito_bold',
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        )) ??
+          new FlatButton(
+            //onPressed: () => Navigator.of(context).pop(true),
+            onPressed: () {
+              SystemNavigator.pop();
+            },
+            child: new Text(
+              'Yes',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'nunito_bold',
+              ),
+            ),
+          ),
+        ],
+      ),
+    )) ??
         false;
   }
 
   Future<String> name = Future<String>.delayed(
     Duration(seconds: 0),
-    () async {
+        () async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (prefs.getString("MemberID") != "" &&
           prefs.getString("MemberID") != null) {
@@ -508,7 +508,7 @@ class _HomeState extends State<Home> {
               },
             ),
             //featured courses
-            
+
 
             SizedBox(height: 20),
 
@@ -654,7 +654,7 @@ class _HomeState extends State<Home> {
                         );
                     },
                     splashColor:
-                        Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
+                    Color.fromRGBO(22, 158, 183, 1).withOpacity(0.3),
                     highlightColor: Colors.transparent,
                   ),
                 ),
@@ -774,7 +774,7 @@ class Packagelist extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 4),
       child: Container(
         margin: EdgeInsets.only(left: 16, right: 16),
-        height: 336,
+        height: 340,
         child: ListView.builder(
           physics: BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
@@ -789,21 +789,25 @@ class Packagelist extends StatelessWidget {
 
   //each testseries package item
   Widget buildpackageItem(Package package) {
+    TextStyle textStyle= TextStyle(
+      color: Colors.grey[800],
+      fontSize: 13,
+    );
+    TextStyle textStyle2= TextStyle(
+      color: Colors.grey[800],
+      fontSize: 13,
+      fontFamily: 'nunito_bold',
+    );
     return Container(
       width: 220,
       margin: EdgeInsets.symmetric(horizontal: 4,vertical: 0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 1,
-              color: Colors.black26,
-            ),
-          ]
-        //border: Border.all(color: Colors.grey[100]),
+          border: Border.all(color: Colors.grey[100]),
       ),
       child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           ClipRRect(
             child: Image.network("http://nursingtestseries.com/" + package.photopath,
@@ -811,115 +815,99 @@ class Packagelist extends StatelessWidget {
               width: 220,
               fit: BoxFit.cover,
             ),
-            borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+            borderRadius: BorderRadius.circular(12),
           ),
           SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              package.packagetitle,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'nunito_bold',
-                  fontSize: 14
+          SizedBox(
+            height:36,
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                (package.packagetitle.length<56)?package.packagetitle:package.packagetitle.substring(0,55)+'...',
+                textAlign: TextAlign.left,
+                style: textStyle2,
+                overflow: TextOverflow.clip,
+                maxLines: 2,
               ),
+
+            ),
+          ),
+          SizedBox(height: 8),
+          Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
+          SizedBox(height: 8),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              'Total Test Paper - ${package.totalpaper}',
+              style:textStyle,
+              textAlign: TextAlign.left,
               overflow: TextOverflow.clip,
             ),
-
           ),
-          SizedBox(height: 6),
-          Padding(
-            padding:EdgeInsets.symmetric(horizontal: 10),
-            child: Divider(height: 0.7,color: Colors.grey[400],),
-          ),
-          SizedBox(height: 6),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              "Total Papers: "+package.totalpaper.toString(),
-              style: TextStyle(
-                  color: Colors.grey[800],
-                  fontSize: 14
-              ),
-              overflow: TextOverflow.clip,
-            ),
-
-          ),
-          SizedBox(height: 6),
-          Padding(
-            padding:EdgeInsets.symmetric(horizontal: 10),
-            child: Divider(height: 0.7,color: Colors.grey[400],),
-          ),
-          SizedBox(height: 6),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+          SizedBox(height: 8),
+          Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
+          SizedBox(height: 8),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               'Full test based on exam pattern',
-              style: TextStyle(
-                  color: Colors.grey[800],
-                  fontSize: 14
-              ),
-              overflow: TextOverflow.clip,
+              style:textStyle,
             ),
-
           ),
-          SizedBox(height: 6),
-          Padding(
-            padding:EdgeInsets.symmetric(horizontal: 10),
-            child: Divider(height: 0.7,color: Colors.grey[400],),
-          ),
-          SizedBox(height: 6),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+          SizedBox(height: 8),
+          Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
+          SizedBox(height: 8),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
             child: Text(
-              'Paper By Expert Faculty',
-              style: TextStyle(
-                  color: Colors.grey[800],
-                  fontSize: 14
-              ),
-              overflow: TextOverflow.clip,
+              'Paper by expert faculty',
+              style:textStyle,
             ),
-
           ),
+          SizedBox(height: 8),
+          Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
           SizedBox(height: 6),
-          Padding(
-            padding:EdgeInsets.symmetric(horizontal: 10),
-            child: Divider(height: 0.7,color: Colors.grey[400],),
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FlatButton(
-                  onPressed:(){},
-                  color:Colors.red,
+                padding:EdgeInsets.symmetric(horizontal: 4),
+                child: RaisedButton(
+                  color: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                   child: Text(
                     'Join Now',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
+                        color: Colors.white,
+                        fontFamily: 'nunito_bold',
+                        fontSize: 13
                     ),
                   ),
+                  onPressed: () {},
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FlatButton(
-                  onPressed:(){},
-                  color:Colors.red,
+                padding:EdgeInsets.symmetric(horizontal: 4),
+                child: RaisedButton(
+                  color: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                   child: Text(
                     'Help',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
+                        color: Colors.white,
+                        fontFamily: 'nunito_bold',
+                        fontSize: 13
                     ),
                   ),
+                  onPressed: () {},
                 ),
               ),
             ],
           )
-
         ],
       ),);
   }

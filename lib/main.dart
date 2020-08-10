@@ -9,7 +9,7 @@ import 'package:dmms/Screens/home.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Color.fromRGBO(49, 139, 176, 1),
+    statusBarColor: Colors.red,
   ));
   runApp(MyApp());
 }
