@@ -341,6 +341,8 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dmms/Models/Package.dart';
+
+import 'board_courses_page.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -659,17 +661,23 @@ class Boardlist extends StatelessWidget {
 
   //each testseries board item
   Widget buildBoardItem(Board board) {
-    return Container(
-      margin: EdgeInsets.only(right: 4, left: 4),
-      width: 90,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-        border: Border.all(color: Colors.grey[100]),
-      ),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context,MaterialPageRoute(builder: (_) => BoardCoursePage()));
+        //showToast('clicked', Colors.red );
+      },
       child: Container(
-        margin: EdgeInsets.all(4),
-        child: Image.network("http://nursingtestseries.com/" + board.image),
+        margin: EdgeInsets.only(right: 4, left: 4),
+        width: 90,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          border: Border.all(color: Colors.grey[100]),
+        ),
+        child: Container(
+          margin: EdgeInsets.all(4),
+          child: Image.network("http://nursingtestseries.com/" + board.image),
+        ),
       ),
     );
   }

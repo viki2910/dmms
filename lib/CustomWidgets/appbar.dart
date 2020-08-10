@@ -11,7 +11,7 @@ dynamic setAppbar(String title) {
             icon: Icon(
               Icons.menu,
               color: Colors.white,
-              size: 30,
+              size: 28,
             ),
             onPressed: () {
                 Scaffold.of(context).openDrawer();
@@ -22,7 +22,7 @@ dynamic setAppbar(String title) {
     title: Text(
       title,
       style: TextStyle(
-        fontSize: 21,
+//        fontSize: 21,
         fontFamily: 'nunito_bold',
         color: Colors.white,
       ),
