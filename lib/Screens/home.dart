@@ -683,19 +683,16 @@ class Packagelist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     this.context = context;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 4),
-      child: Container(
-        margin: EdgeInsets.only(left: 16, right: 16),
-        height: 340,
-        child: ListView.builder(
-          physics: BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          itemCount:package.length,
-          itemBuilder: (BuildContext context, int index) {
-            return buildpackageItem(package[index]);
-          },
-        ),
+    return Container(
+      margin: EdgeInsets.only(left: 16, right: 16),
+      height: 344,
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount:package.length,
+        itemBuilder: (BuildContext context, int index) {
+          return buildpackageItem(package[index]);
+        },
       ),
     );
   }
@@ -713,7 +710,7 @@ class Packagelist extends StatelessWidget {
     );
     return Container(
       width: 220,
-      margin: EdgeInsets.symmetric(horizontal: 4,vertical: 0),
+      margin: EdgeInsets.symmetric(horizontal: 4,vertical: 4),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Colors.white,
@@ -779,7 +776,7 @@ class Packagelist extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
-          SizedBox(height: 6),
+          SizedBox(height: 3),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
