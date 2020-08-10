@@ -1,11 +1,30 @@
 import 'package:dmms/CustomWidgets/appbar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+import 'package:dmms/Models/Package.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 class BoardCoursePage extends StatefulWidget {
   @override
   _BoardCoursePageState createState() => _BoardCoursePageState();
 }
-
+Future<List<Package>> fetchListPackage(http.Client client) async {
+  final http.Response response =
+  await http.post('http://nursingtestseries.com/api/android_service.aspx', headers: <String, String>{
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  },body:<String,String>{
+    "Request":'{"MethodName":"packageall","action":"all"}'
+  });
+  return compute(parsePackage,response.body);
+}
+List<Package> parsePackage(String responseBody) {
+  var tmp = json.decode(responseBody);
+  var tmp1 = tmp["data"] as List;
+  return tmp1.map<Package>((json) => Package.fromJson(json)).toList();
+}
 class _BoardCoursePageState extends State<BoardCoursePage> {
   @override
   Widget build(BuildContext context) {
@@ -21,21 +40,33 @@ class _BoardCoursePageState extends State<BoardCoursePage> {
         ),
 
       ),
-      body: Container(
-        child: ListView.builder(
-          itemCount: 12,
-          itemBuilder: (context,index){
-            return courseCard(index);
-          },
-        ),
+      body:
+      FutureBuilder<List<Package>>(
+        future: fetchListPackage(http.Client()),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) print(snapshot.error);
+
+          return snapshot.hasData
+              ? Packagelist(package: snapshot.data)
+              : Center(child: CircularProgressIndicator());
+        },
       ),
+//      Container(
+//        child: ListView.builder(
+//          itemCount: 12,
+//          itemBuilder: (context,index){
+//            return courseCard(index);
+//          },
+//        ),
+//      ),
     );
   }
 }
 
 class courseCard extends StatelessWidget {
   int _index;
-  courseCard(this._index);
+  Package package;
+  courseCard(this.package);
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle= TextStyle(
@@ -65,8 +96,7 @@ class courseCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           ClipRRect(
-            child:Image(
-              image: AssetImage('assets/i2.jpg'),
+            child:Image.network("http://nursingtestseries.com/" + package.photopath,
               fit: BoxFit.cover,
             ),
 //            child: Image.network("http://nursingtestseries.com/" + package.photopath,
@@ -80,7 +110,7 @@ class courseCard extends StatelessWidget {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 8),
             child: Text(
-            'JIPMER Satff Nurse Exam - 2021 Premium Test Paper',
+            package.packagetitle,
               textAlign: TextAlign.left,
               style: textStyle2,
               overflow: TextOverflow.clip,
@@ -94,7 +124,7 @@ class courseCard extends StatelessWidget {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 8),
             child: Text(
-              'Total Test Paper - 2',
+              'Total Test Paper - '+package.totalpaper.toString(),
               style:textStyle,
               textAlign: TextAlign.left,
               overflow: TextOverflow.clip,
@@ -167,5 +197,24 @@ class courseCard extends StatelessWidget {
           SizedBox(height: 4),
         ],
       ),);
+  }
+}
+class Packagelist extends StatelessWidget {
+  final List<Package> package;
+  BuildContext context;
+
+  Packagelist({this.package});
+
+  @override
+  Widget build(BuildContext context) {
+    this.context = context;
+    return Container(
+      child: ListView.builder(
+        itemCount:package.length,
+        itemBuilder: (BuildContext context, int index) {
+          return courseCard(package[index]);
+        },
+      ),
+    );
   }
 }
