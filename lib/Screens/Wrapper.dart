@@ -1,6 +1,7 @@
 import 'package:dmms/CustomWidgets/NavigationDrawer.dart';
 import 'package:dmms/Screens/MyPapers.dart';
 import 'package:dmms/Screens/home.dart';
+import 'package:dmms/Screens/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,7 +13,7 @@ class Wrapper extends StatefulWidget {
 class _WrapperState extends State<Wrapper> {
   int _index=0;
   List<Widget> pagelist=[
-    Home(),MyPapers(),
+    Home(),MyPapers(),testApp()
   ];
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class _WrapperState extends State<Wrapper> {
       statusBarColor: Colors.red,
     ));
     return Scaffold(
-        body: pagelist[_index],
+        body: pagelist[_index]!=null ?pagelist[_index]:pagelist[0],
         drawer: NavDrawer(),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _index,

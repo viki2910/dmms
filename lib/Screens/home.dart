@@ -481,7 +481,7 @@ class _HomeState extends State<Home> {
                 style: headingTextStyle2,
               ),
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 8),
             FutureBuilder<List<Package>>(
               future: fetchListPackage(http.Client()),
               builder: (context, snapshot) {

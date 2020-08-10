@@ -38,6 +38,7 @@ dev_dependencies:
   http: 0.12.1
   fluttertoast: ^4.0.0
   bubble_bottom_bar: ^1.2.0
+  flutter_swiper:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
