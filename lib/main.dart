@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:dmms/Screens/ForgetPassword.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dmms/Screens/home.dart';
+import 'package:dmms/Screens/Wrapper.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
               if(snapshot.data==false)
                 return InitialScreen();
               else
-                return Home();    
+                return Wrapper(); ////////////////
             }
             return CircularProgressIndicator();
         }

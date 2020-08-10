@@ -441,21 +441,6 @@ class _HomeState extends State<Home> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.red,
     ));
-    switch (_index) {
-      case 0:
-        print("Index is $_index");
-        showToast("Clicked Home", Colors.black);
-        break;
-      case 1:
-        Navigator.push(context, MaterialPageRoute(
-            builder: (_)=>MyPapers()
-        ));
-        print("Index is $_index");
-        break;
-      case 2:
-        print("Index is $_index");
-        break;
-    }
     return new WillPopScope(
       onWillPop: () => _onWillPop(),
       child: Scaffold(
@@ -513,78 +498,6 @@ class _HomeState extends State<Home> {
             SizedBox(height: 20),
 
           ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _index,
-          backgroundColor: Colors.white,
-          selectedItemColor: Colors.red,
-          unselectedItemColor: Colors.grey[800],
-          showUnselectedLabels: true,
-          elevation: 12,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  color: Colors.grey[800],
-                ),
-                activeIcon: Icon(
-                  Icons.home,
-                  color: Colors.red,
-                ),
-                title: Text(
-                  'Home',
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.center,
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.view_list,
-                  color: Colors.grey[800],
-                ),
-                activeIcon: Icon(
-                  Icons.view_list,
-                  color: Colors.red,
-                ),
-                title: Text(
-                  'My Papers',
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.center,
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.pageview,
-                  color: Colors.grey[800],
-                ),
-                activeIcon: Icon(
-                  Icons.pageview,
-                  color: Colors.red,
-                ),
-                title: Text(
-                  'Solutions',
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.center,
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.add_to_queue,
-                  color: Colors.grey[800],
-                ),
-                activeIcon: Icon(
-                  Icons.add_to_queue,
-                  color: Colors.red,
-                ),
-                title: Text(
-                  'Join Series',
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.center,
-                )),
-            //  BottomNavigationBarItem(icon: Icon(Icons.notifications,color:Colors.grey[800],),activeIcon: Icon(Icons.notifications,color:Colors.red,),title: Text('Notifications',overflow: TextOverflow.clip,)),
-          ],
-          onTap: (int index) {
-            setState(() {
-              _index = index;
-            });
-          },
         ),
       ),
     );
