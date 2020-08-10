@@ -14,7 +14,7 @@ class _BoardCoursePageState extends State<BoardCoursePage> {
         backgroundColor: Colors.red,
         title:Text(
             'Courses',
-          style: TextStyle(
+            style: TextStyle(
             color: Colors.white,
             fontFamily: 'nunito_bold',
           ),

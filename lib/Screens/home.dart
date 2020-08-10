@@ -723,6 +723,13 @@ class Packagelist extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           color: Colors.white,
           border: Border.all(color: Colors.grey[100]),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                spreadRadius: 0,
+                blurRadius: 3
+            )
+          ]
       ),
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
