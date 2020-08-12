@@ -7,6 +7,7 @@ import 'package:dmms/Models/Package.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:dmms/Screens/course_details_page.dart';
 class BoardCoursePage extends StatefulWidget {
   @override
   _BoardCoursePageState createState() => _BoardCoursePageState();
@@ -98,6 +99,7 @@ class courseCard extends StatelessWidget {
           ClipRRect(
             child:Image.network("http://nursingtestseries.com/" + package.photopath,
               fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width,
             ),
 //            child: Image.network("http://nursingtestseries.com/" + package.photopath,
 //              height: 120,
@@ -171,7 +173,9 @@ class courseCard extends StatelessWidget {
                         fontSize: 15
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (_) => DetailsPage()));
+                  },
                 ),
               ),
               Padding(

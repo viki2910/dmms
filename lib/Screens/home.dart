@@ -341,7 +341,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dmms/Models/Package.dart';
-
+import 'package:dmms/Screens/course_details_page.dart';
 import 'board_courses_page.dart';
 class Home extends StatefulWidget {
   @override
@@ -810,7 +810,9 @@ class Packagelist extends StatelessWidget {
                         fontSize: 13
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (_) => DetailsPage()));
+                  },
                 ),
               ),
               Padding(

@@ -103,20 +103,6 @@ class list extends StatelessWidget {
 
           ),
         ),
-        Container(
-          color: Color.fromRGBO(49, 139, 176, 1),
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Text(
-              '2020 DMMS, All rights reserved',
-              style:TextStyle(
-                fontFamily: 'nunito_bold',
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        )
       ],
     );
   }
@@ -147,8 +133,9 @@ class list extends StatelessWidget {
               paper.papertitle,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color.fromRGBO(49, 139, 176, 1),
+                color: Colors.grey[800],
                 fontSize: 14,
+                fontFamily: 'nunito_bold'
               ),
             ),
           ),
@@ -177,7 +164,7 @@ class list extends StatelessWidget {
           Divider(height: 0.7, color: Colors.grey[300],indent: 12,endIndent: 12),
           SizedBox(height: 10),
           RaisedButton(
-            color: Color.fromRGBO(49, 139, 176, 1),
+            color: Colors.green,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),

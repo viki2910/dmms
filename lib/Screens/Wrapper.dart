@@ -13,7 +13,7 @@ class Wrapper extends StatefulWidget {
 class _WrapperState extends State<Wrapper> {
   int _index=0;
   List<Widget> pagelist=[
-    Home(),MyPapers(),testApp()
+    Home(),MyPapers(),Home(),Home()
   ];
   @override
   Widget build(BuildContext context) {
@@ -26,6 +26,9 @@ class _WrapperState extends State<Wrapper> {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _index,
           backgroundColor: Colors.white,
+//          iconSize: 24,
+//          selectedFontSize: 12,
+//          unselectedFontSize: 12,
           selectedItemColor: Colors.red,
           unselectedItemColor: Colors.grey[800],
           showUnselectedLabels: true,
@@ -87,6 +90,20 @@ class _WrapperState extends State<Wrapper> {
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.center,
                 )),
+//            BottomNavigationBarItem(
+//                icon: Icon(
+//                  Icons.notifications,
+//                  color: Colors.grey[800],
+//                ),
+//                activeIcon: Icon(
+//                  Icons.notifications,
+//                  color: Colors.red,
+//                ),
+//                title: Text(
+//                  'Notification',
+//                  overflow: TextOverflow.clip,
+//                  textAlign: TextAlign.center,
+//                )),
             //  BottomNavigationBarItem(icon: Icon(Icons.notifications,color:Colors.grey[800],),activeIcon: Icon(Icons.notifications,color:Colors.red,),title: Text('Notifications',overflow: TextOverflow.clip,)),
           ],
           onTap: (int index) {
