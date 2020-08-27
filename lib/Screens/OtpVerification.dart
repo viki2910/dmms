@@ -2,12 +2,14 @@ import 'dart:math';
 
 import 'package:dmms/CustomWidgets/Toast.dart';
 import 'package:dmms/CustomWidgets/edit_text_style.dart';
+import 'package:dmms/Screens/Login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dmms/Models/Result.dart';
+import 'package:dmms/Screens/test.dart';
 
 class OtpScreen extends StatefulWidget {
   final String mobile;
@@ -149,7 +151,8 @@ class _OtpScreenState extends State<OtpScreen> {
       await prefs.setString("Password",result.data[0].password);
       await prefs.setString("Mobile",result.data[0].mobile);
       Navigator.push(context, MaterialPageRoute(
-          builder: (_)=>Home()
+          builder: (_)=>testApp(memberID:result.data[0].memberID ,password:"1234")
+        //LoginScreen(memberID:result.data[0].memberID)
       ));
     }
     else{

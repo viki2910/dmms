@@ -40,12 +40,12 @@ class MyApp extends StatelessWidget {
           future: checkLogIn, // a previously-obtained Future<String> or null
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (snapshot.hasData) {
-              if(snapshot.data==false)
+              //if(snapshot.data==false)
                 return InitialScreen();
-              else
-                return Wrapper(); /////////////////
+              //else
+                //return Wrapper(); /////////////////
             }
-            return CircularProgressIndicator();
+            return InitialScreen();
         }
       ),
     );

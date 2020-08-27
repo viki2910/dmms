@@ -38,12 +38,7 @@ class _InitialScreenState extends State<InitialScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: 170),
-                    Image(
-                      image: AssetImage('assets/logo_new.png'),
-                      height:75,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    SizedBox(height: 40),
+                    SizedBox(height: 115),
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
